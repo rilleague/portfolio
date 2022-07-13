@@ -55,3 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # database.yml内のDB接続の為のデータを環境変数を用いて定義する為のGem
 gem 'dotenv-rails'
+
+# ユーザー管理を行う為のGem
+gem 'devise'
