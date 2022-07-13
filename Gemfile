@@ -58,3 +58,6 @@ gem 'dotenv-rails'
 
 # ユーザー管理を行う為のGem
 gem 'devise'
+
+# デバッグの為のGem
+gem 'pry-rails'
