@@ -10,6 +10,24 @@
   </head>
 
   <body>
+    <header>
+      <div class="nav">
+        <% if user_signed_in? %>
+          <div class="nav__right">
+            <%= link_to current_user.nickname, "#" %>
+            <%= link_to "ログアウト", "#" , method: :delete %>
+            <%= link_to "投稿する", "#" %>
+            <%# <%= link_to "マイページ", "#" %>
+            <%# <%= link_to "カレンダー", "#" %>
+          </div>
+        <% else %>
+          <div class="nav__right">
+            <%= link_to "新規登録", "#" %>
+            <%= link_to "ログイン", "#" %>
+          </div>
+        <% end %>
+      </div>
+    </header>
     <%# flashメッセージの表示設定 %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
