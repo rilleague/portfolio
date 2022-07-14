@@ -1,0 +1,24 @@
+/* ヘッダー */
+.header {
+  padding: 5px 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
+}
+
+.nav {
+  margin-bottom: 20px;
+}
+
+/* メイン */
+.main {
+  background-color: #5CF0DA;
+  width: 100vw;
+  height :100vh
+}
+
+.mandatory {
+  color: rgb(211, 38, 38);
+}
+
+.footer {
+  padding: 0 auto;
+}

@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="header">
       <div class="nav">
         <% if user_signed_in? %>
           <div class="nav__right">
@@ -29,5 +29,8 @@
       </div>
     </header>
     <%= yield %>
+    <footer class="footer">
+      <p class="copyright">COPYRIGHT ©  Polishan Inc. All rights Reserved.</p>
+    </footer>
   </body>
 </html>
