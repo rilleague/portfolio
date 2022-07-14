@@ -14,4 +14,7 @@ class Part < ActiveHash::Base
     { id: 12, name: '足' },
     { id: 13, name: 'その他' }
   ]
+
+  include ActiveHash::Associations
+  has_many :posts
 end

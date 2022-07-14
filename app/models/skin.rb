@@ -7,4 +7,7 @@ class Skin < ActiveHash::Base
     { id: 5, name: '混合肌' },
     { id: 6, name: '普通肌' }
   ]
+
+  include ActiveHash::Associations
+  has_many :posts
 end
