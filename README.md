@@ -32,6 +32,10 @@
 
 ### association
 - belongs_to :user
+- mount_uploaders :images, ImageUploader
+- belongs_to :category
+- belongs_to :part
+- belongs_to :skin
 <!-- - has_many   :favorites
 - has_many   :comments
 - has_many   :tags, through: :post_tags
