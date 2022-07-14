@@ -1,2 +1,56 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="main">
+  <div class="inner">
+    <div class="form__wrapper">
+      <%= form_with model: @post, local: true do |f| %>
+        <div class="field">
+          <div class="image-field">
+            <%= f.file_field :images, multiple: true %>
+          </div>
+          <p>画像を選択する</p>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :title, "タイトル：" %>
+            <span class="mandatory">※必須</span>
+          </div>
+          <%= f.text_field :title, id:"post_title" %>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :category_id, "投稿カテゴリー：" %>
+            <span class="mandatory">※必須</span>
+          </div>
+          <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "select-box"}) %>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :part_id, "部位：" %>
+          </div>
+          <%= f.collection_select(:part_id, Part.all, :id, :name, {}, {class: "select-box"}) %>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :skin_id, "肌質：" %>
+          </div>
+          <%= f.collection_select(:skin_id, Skin.all, :id, :name, {}, {class: "select-box"}) %>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :detail, "内容：" %>
+            <span class="mandatory">※必須</span>
+          </div>
+          <%= f.text_area :detail, id:"post_detail" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "投稿", class: :form_btn %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
