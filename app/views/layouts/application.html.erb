@@ -14,9 +14,9 @@
       <div class="nav">
         <% if user_signed_in? %>
           <div class="nav__right">
+            <%= link_to "投稿する", "#", class: "post" %>
             <%= link_to current_user.nickname, "#" %>
             <%= link_to "ログアウト", destroy_user_session_path , method: :delete %>
-            <%= link_to "投稿する", "#", class: "post" %>
             <%# <%= link_to "マイページ", "#" %>
             <%# <%= link_to "カレンダー", "#" %>
           </div>
