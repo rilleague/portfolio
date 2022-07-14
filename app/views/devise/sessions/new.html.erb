@@ -1,0 +1,26 @@
+<div class="contents row">
+  <h2>ログイン</h2>
+  <div class="login-form">
+    <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+
+      <div class="field">
+        <div class="form-text-wrap">
+          <label class= "form-text">メールアドレス</label><br/>
+        </div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <div class="form-text-wrap">
+          <label class= "form-text">パスワード</label>
+          <span class="term">(英数字混合6文字以上)</span>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "ログイン" %>
+      </div>
+    <% end %>
+  </div>
+</div>
