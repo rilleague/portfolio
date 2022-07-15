@@ -36,10 +36,10 @@
 - belongs_to :category
 - belongs_to :part
 - belongs_to :skin
+- has_many   :tags, through: :post_tags
+- has_many   :post_tags, dependent: :destroy
 <!-- - has_many   :favorites
 - has_many   :comments
-- has_many   :tags, through: :post_tags
-- has_many   :post_tags
 - has_many   :favorites -->
 
 
@@ -64,7 +64,7 @@
 
 ### association
 - has_many   :posts, through: :post_tags
-- has_many   :post_tags
+- has_many   :post_tags, dependent: :destroy
 
 
 ## post_tagsテーブル
