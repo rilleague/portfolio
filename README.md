@@ -54,13 +54,13 @@
 
 ### association
 - belongs_to :user
-- belongs_to :post
+- belongs_to :post -->
 
 
 ## tagsテーブル
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | ------------------------------- |
-| tagname            | string     | unique: true                    |
+| tagname            | string     |                                 |
 
 ### association
 - has_many   :posts, through: :post_tags
@@ -75,11 +75,11 @@
 
 ### association
 - belongs_to :post
-- belongs_to :tag
+- belongs_to :tag 
 
 
 
-## favoritesテーブル
+<!-- ## favoritesテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | null: false, foreign_key: true |
@@ -87,7 +87,7 @@
 
 ### association
 - belongs_to :user
-- belongs_to :post
+- belongs_to :post -->
 
 
 
@@ -99,4 +99,4 @@
 
 ### association
 - belongs_to :user
-- belongs_to :follow, class_name: 'User' -->
+- belongs_to :follow, class_name: 'User' 
