@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
+    @post.post_tags.build
   end
 
   def create
@@ -14,6 +15,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, { images: [] }).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, { tag_ids: [] }, { images: [] }).merge(user_id: current_user.id)
   end
 end
