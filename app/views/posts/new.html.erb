@@ -1,7 +1,7 @@
 <div class="main">
   <div class="inner">
     <div class="form__wrapper">
-      <%= form_with model: @post, local: true do |f| %>
+      <%= form_with model: @post, url: posts_path, local: true do |f| %>
         <div class="field">
           <div class="image-field">
             <%= f.file_field :images, multiple: true %>
@@ -14,7 +14,7 @@
             <%= f.label :title, "タイトル：" %>
             <span class="mandatory">※必須</span>
           </div>
-          <%= f.text_field :title, id:"post_title" %>
+          <%= f.text_field :title, class: "posts-text", id:"post_title" %>
         </div>
 
         <div class="field">
@@ -44,7 +44,14 @@
             <%= f.label :detail, "内容：" %>
             <span class="mandatory">※必須</span>
           </div>
-          <%= f.text_area :detail, id:"post_detail" %>
+          <%= f.text_area :detail, class: "posts-text", id:"post_detail" %>
+        </div>
+
+        <div class="field">
+          <div class="field-bold-text">
+            <%= f.label :tagname, "タグ(タグ同士の間には半角の「,」を入れてください)：" %>
+          </div>
+          <%= f.text_field :tagname, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
         </div>
 
         <div class="actions">

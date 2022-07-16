@@ -1,12 +1,14 @@
 class PostsController < ApplicationController
   def new
-    @post = Post.new
-    @post.post_tags.build
+    @post = PostForm.new
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save
+    @post = PostForm.new(post_form_params)
+    tag_list = params[:post_form][:tagname].split(',')
+    if @post.valid?
+      # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
+      @post.save(tag_list)
       redirect_to root_path
     else
       render :new
@@ -14,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   private
-  def post_params
-    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, { tag_ids: [] }, { images: [] }).merge(user_id: current_user.id)
+  def post_form_params
+    params.require(:post_form).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
   end
 end
