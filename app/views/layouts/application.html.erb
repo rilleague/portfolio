@@ -10,11 +10,11 @@
   </head>
 
   <body>
-    <header>
+    <header class="header">
       <div class="nav">
         <% if user_signed_in? %>
           <div class="nav__right">
-            <%= link_to "投稿する", "#", class: "post" %>
+            <%= link_to "投稿する", new_post_path, class: "post" %>
             <%= link_to current_user.nickname, "#" %>
             <%= link_to "ログアウト", destroy_user_session_path , method: :delete %>
             <%# <%= link_to "マイページ", "#" %>
@@ -29,5 +29,8 @@
       </div>
     </header>
     <%= yield %>
+    <footer class="footer">
+      <p class="copyright">COPYRIGHT ©  Polishan Inc. All rights Reserved.</p>
+    </footer>
   </body>
 </html>

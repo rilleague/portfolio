@@ -61,3 +61,11 @@ gem 'devise'
 
 # デバッグの為のGem
 gem 'pry-rails'
+
+# 画像のアップロードを可能にする為のGem
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+# ActiveHashを導入する為のGem
+gem 'active_hash'
