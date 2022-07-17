@@ -2,15 +2,13 @@ class PostForm
   include ActiveModel::Model
   # PostFormオブジェクトが、PostモデルとTagモデルの属性を扱えるようにする
   attr_accessor :title, :images, :category_id, :part_id, :skin_id, :detail, :tagname, :user_id, :post_id, :tag_id
-  
+
   # PostモデルのバリデーションをFormオブジェクト内に移す
   with_options presence: true do 
     validates :title
     validates :category_id, numericality: { other_than: 1, message: "can't be blank"}
     validates :detail
   end
-  validates :part_id, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :skin_id, numericality: { other_than: 1, message: "can't be blank" }
 
   # フォームから送られてきた投稿内容をテーブルに保存する処理を記述
   def save(tag_list)
