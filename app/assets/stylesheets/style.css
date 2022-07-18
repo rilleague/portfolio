@@ -22,3 +22,17 @@
 .footer {
   padding: 0 auto;
 }
+
+/* 投稿一覧表示 */
+
+.main-contents {
+  background-color: #B9F0E8;
+}
+
+.new-post_page {
+  color: #1374C6;
+}
+
+.list {
+  list-style: none;
+}

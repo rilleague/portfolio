@@ -1,4 +1,12 @@
 class PostsController < ApplicationController
+  def index
+    if params[:category_id] != nil
+      @posts =  Post.where(category_id: params[:category_id])
+    else
+      redirect_to root_path
+    end
+  end
+
   def new
     @post = PostForm.new
   end
@@ -9,7 +17,7 @@ class PostsController < ApplicationController
     if @post.valid?
       # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
       @post.save(tag_list)
-      redirect_to root_path
+      redirect_to "/posts?category_id=#{params[:post_form][:category_id]}"
     else
       render :new
     end

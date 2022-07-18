@@ -1,0 +1,27 @@
+<div class="main-contents">
+  <h2 class="new-post_page">美容投稿</h2>
+  <div class="post-contents">
+    <ul class="post-lists">
+
+      <% @posts.each do |t| %>
+      <li class="list">
+        <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
+        <%= link_to "#" do %>
+        <%# ３枚の画像のうち、最初の一枚目を表示 %>
+        <div class="post-image">
+          <% t.images.each do |image|%>
+            <%= image_tag image.to_s %>
+            <% break %>
+          <% end %>
+        </div>
+        <%# 各投稿のタイトル表示 %>
+        <div class="post-title">
+          <%= t.title %>
+        </div>
+        <%# 各投稿のタグ情報を「#」を付けて表示 %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
