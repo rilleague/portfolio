@@ -12,6 +12,9 @@
   <body>
     <header class="header">
       <div class="nav">
+        <div class="nav__left">
+            <%= link_to image_tag("polishine-logo.png", class: :logo), root_path %>
+        </div>
         <% if user_signed_in? %>
           <div class="nav__right">
             <%= link_to "投稿する", new_post_path, class: "post" %>

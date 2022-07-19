@@ -1,38 +1,105 @@
 /* ヘッダー */
 .header {
-  padding: 5px 0;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
 }
 
 .nav {
-  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
+.logo {
+  width: 120px;
+  height: 50px;
+} 
+
+/* トップページ */
+
+.top-page {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("bg-image.png");
+  background-size: cover;
+  background-position: top center;
+  display: flex;
+}
+
+.page-btn {
+  margin: 520px 0 10px;
+  display: flex;
+  padding-left: 120px;
+  width: 40%;
+}
+
+.beauty-btn {
+  margin-right: 100px;
+  height: 15vh;
+  justify-content: space-between;
+}
+
+.consult-btn {
+  height: 15vh;
+}
+
+
 /* メイン */
-.main {
+.main-post {
   background-color: #5CF0DA;
   width: 100vw;
-  height :100vh
+  height: 100vh;
 }
 
 .mandatory {
   color: rgb(211, 38, 38);
 }
 
+/* フッター */
 .footer {
-  padding: 0 auto;
+  padding: 5px 0;
+  width: 100vw;
+  height: 20px;
 }
+
+.copyright {
+  text-align: center;
+  color: #999;
+  font-size: 5px;
+}
+
 
 /* 投稿一覧表示 */
 
 .main-contents {
   background-color: #B9F0E8;
+  width: 100vw;
 }
 
 .new-post_page {
   color: #1374C6;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.post-lists {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .list {
+  background-color: #FFFFFF;
   list-style: none;
+  margin: 20px 20px;
+  padding: 10px;
+  border: 1px solid #4e7bcc;
+  width: 15%;
+}
+
+.post-nickname {
+  padding-bottom: 10px;
+}
+
+.post-image {
+  text-align: center;
+  border: 1px solid #b2b3b6;
 }

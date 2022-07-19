@@ -1,25 +1,49 @@
 <div class="main-contents">
-  <h2 class="new-post_page">美容投稿</h2>
+  <h2 class="new-post_page">
+    <% if @category_id == "2"%>
+      美容投稿
+    <% else %>
+      お悩み投稿
+    <% end %>
+  </h2>
   <div class="post-contents">
     <ul class="post-lists">
-
       <% @posts.each do |t| %>
       <li class="list">
+
         <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
         <%= link_to "#" do %>
+        <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
+        <div class="post-nickname">
+          <%= t.user.nickname %>さん
+        </div>
+
         <%# ３枚の画像のうち、最初の一枚目を表示 %>
         <div class="post-image">
+        <% if t.images[0] != nil%>
           <% t.images.each do |image|%>
             <%= image_tag image.to_s %>
             <% break %>
           <% end %>
+        <% else %>
+        <%# 投稿画像が一枚も無ければ、ダミー画像を表示 %>
+          <%= image_tag("noimage.png", size: "100x100",class:"no-image") %>
+        <% end %>
         </div>
+
         <%# 各投稿のタイトル表示 %>
         <div class="post-title">
-          <%= t.title %>
+          <b><%= t.title %></b>
         </div>
-        <%# 各投稿のタグ情報を「#」を付けて表示 %>
+
+        <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
+        <div class=“post-tags”>
+          <% t.tags.each do |n| %>
+            <div class=“tag-name”>#<%= n.tagname %></div>
+          <% end %>
+        </div>
         <% end %>
+
       </li>
       <% end %>
     </ul>
