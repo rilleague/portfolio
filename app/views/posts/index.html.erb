@@ -8,20 +8,20 @@
   </h2>
   <div class="post-contents">
     <ul class="post-lists">
-      <% @posts.each do |t| %>
+      <% @posts.each do |post| %>
       <li class="list">
 
         <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
-        <%= link_to "#" do %>
+        <%= link_to post_path(post.id) do %>
         <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
         <div class="post-nickname">
-          <%= t.user.nickname %>さん
+          <%= post.user.nickname %>さん
         </div>
 
         <%# ３枚の画像のうち、最初の一枚目を表示 %>
         <div class="post-image">
-        <% if t.images[0] != nil%>
-          <% t.images.each do |image|%>
+        <% if post.images[0] != nil%>
+          <% post.images.each do |image|%>
             <%= image_tag image.to_s %>
             <% break %>
           <% end %>
@@ -33,12 +33,12 @@
 
         <%# 各投稿のタイトル表示 %>
         <div class="post-title">
-          <b><%= t.title %></b>
+          <b><%= post.title %></b>
         </div>
 
         <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
         <div class=“post-tags”>
-          <% t.tags.each do |n| %>
+          <% post.tags.each do |n| %>
             <div class=“tag-name”>#<%= n.tagname %></div>
           <% end %>
         </div>
