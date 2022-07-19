@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   def index
-    if params[:category_id] != nil
-      @posts =  Post.where(category_id: params[:category_id])
+    @category_id = params[:category_id]
+    if params[:category_id] == "2"
+      @posts =  Post.where(category_id: 2).order("created_at DESC")
     else
-      redirect_to root_path
+      @posts =  Post.where(category_id: 3).order("created_at DESC")
     end
   end
 
