@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new]
+
   def index
     @category_id = params[:category_id]
     if params[:category_id] == "2"
