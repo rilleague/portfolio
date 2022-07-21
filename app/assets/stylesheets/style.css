@@ -155,7 +155,7 @@
   margin-bottom: 20px;
 }
 
-.post__image, .post__noimage {
+.post__image, .dummy__image {
   border: 1px solid #b2b3b6;
   border-radius: 10px;
 }

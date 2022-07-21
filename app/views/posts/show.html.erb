@@ -8,46 +8,16 @@
           <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
         </div>
 
-        <%# 画像は３枚表示され、画像が１枚でも無い場合はデモ画像を表示 %>
-        <% if @post.images.count == 3%>
-          <div class="detail-post-images">
-            <% @post.images.each do |image|%>
-              <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
-            <% end %>
-          </div>
-        <% else %>
-
-          <%# 画像が２枚のみ表示されている場合、ダミー画像１枚表示 %>
-          <% if @post.images.count == 2 %>
-            <div class="detail-post-images">
-              <% @post.images.each do |image|%>
-                <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
-              <% end %>
-              <%= image_tag("noimage.png", size: "300x300", class:"post__noimage") %>
-            </div>
+        <%# 画像を３枚表示 ※画像が保存されていない場合は、ダミー画像を表示%>
+        <div class="detail-post-images">
+          <% image_count = 3 - @post.images.count %>
+          <% @post.images.each do |image|%>
+            <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
           <% end %>
-
-          <%# 画像が1枚のみ表示されている場合、ダミー画像2枚表示 %>
-          <% if @post.images.count == 1 %>
-            <div class="detail-post-images">
-              <% @post.images.each do |image|%>
-                <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
-              <% end %>
-              <% 2.times do %>
-                <%= image_tag("noimage.png", size: "300x300", class:"post__noimage") %>
-              <% end %>
-            </div>
+          <% image_count.times do %>
+            <%= image_tag("noimage.png", size: "300x300", class:"dummy__image") %>
           <% end %>
-
-          <%# 画像が１枚のも保存されていない場合、ダミー画像3枚表示 %>
-          <% if @post.images.count == 0 %>
-            <div class="detail-post-images">
-              <% 3.times do %>
-                <%= image_tag("noimage.png", size: "300x300", class:"post__noimage") %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
+        </div>
 
         <%# タイトル表示 %>
         <div class="detail-post-title">
