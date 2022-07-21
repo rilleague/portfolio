@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new]
+  before_action :authenticate_user!, only: [:index, :new, :show]
 
   def index
     @category_id = params[:category_id]
@@ -24,6 +24,10 @@ class PostsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
   private

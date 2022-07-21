@@ -1,0 +1,58 @@
+<div class="detail-page">
+  <div class="detail-page-contents">
+    <div class="detail-posts">
+      <div class="detail-post">
+
+        <%# ニックネーム表示 %>
+        <div class="detail-post-username">
+          <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
+        </div>
+
+        <%# 画像を３枚表示 ※画像が保存されていない場合は、ダミー画像を表示%>
+        <div class="detail-post-images">
+          <% image_count = 3 - @post.images.count %>
+          <% @post.images.each do |image|%>
+            <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
+          <% end %>
+          <% image_count.times do %>
+            <%= image_tag("noimage.png", size: "300x300", class:"dummy__image") %>
+          <% end %>
+        </div>
+
+        <%# タイトル表示 %>
+        <div class="detail-post-title">
+          <b><%= @post.title %></b>
+        </div>
+
+        <%# 部位・肌質の任意項目の表示 %>
+        <div class="detail-any-items">
+          <span class="any-item"><%= @post.skin.name %>/<%= @post.part.name %></span>
+        </div>
+
+        <%# 本文表示（文章＆ハッシュタグ） %>
+        <div class="detail-main-post">
+          <%# 文章表示 %>
+          <div class="text">
+            <p><%= @post.detail %></p>
+          </div>
+
+          <%# ハッシュタグ表示 %>
+          <div class=“detail-post-tags”>
+            <% @post.tags.each do |n| %>
+              <div class=“detail-post-tag”>#<%= n.tagname %></div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <% if user_signed_in? && current_user.id == @post.user.id %>
+      <div class="action-lists">
+        <div class="action-list">
+            <%= link_to '編集', "#", method: :get, class:"action__btn" %><br>
+            <%= link_to '削除', "#", method: :delete, class:"action__btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
