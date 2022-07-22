@@ -133,10 +133,10 @@
   font-size: 15px;
 }
 
-.detail-posts {
+.detail-post {
   border: 1px solid #b2b3b6;
   background-color: #FFFFFF;
-  height: 80vh;
+  height: 100vh;
   width: 70vw;
   padding: 20px 30px;
 }
@@ -172,4 +172,10 @@
 
 .detail-main-post {
   border: 1px solid #b2b3b6;
+}
+
+.detail-post-comments {
+  border: 1px solid #b2b3b6;
+  margin-top: 20px;
+  padding-top: 20px;
 }
