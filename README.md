@@ -9,12 +9,12 @@
 
 ### association
 - has_many :posts
-<!-- - has_many :comments
-- has_many :favorites
+- has_many :comments
+<!-- - has_many :favorites
 - has_many :relationships
 - has_many :followings, through: :relationships, source: :follow
 - has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-- has_many :followers, through: :reverse_of_relationships, source: :user --> -->
+- has_many :followers, through: :reverse_of_relationships, source: :user  -->
 
 
 
@@ -38,14 +38,14 @@
 - belongs_to :skin
 - has_many   :tags, through: :post_tags
 - has_many   :post_tags, dependent: :destroy
-<!-- - has_many   :favorites
+<!-- - has_many   :favorites -->
 - has_many   :comments
-- has_many   :favorites -->
+<!-- - has_many   :favorites  -->
 
 
 
 
-<!-- ## commentsテーブル
+## commentsテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | content            | text       | null: false                    |
@@ -54,7 +54,7 @@
 
 ### association
 - belongs_to :user
-- belongs_to :post -->
+- belongs_to :post
 
 
 ## tagsテーブル
