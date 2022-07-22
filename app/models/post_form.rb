@@ -1,5 +1,7 @@
 class PostForm
   include ActiveModel::Model
+  extend CarrierWave::Mount
+  mount_uploaders :images, ImageUploader
   # PostFormオブジェクトが、PostモデルとTagモデルの属性を扱えるようにする
   attr_accessor :title, :images, :category_id, :part_id, :skin_id, :detail, :tagname, :user_id, :post_id, :tag_id
 

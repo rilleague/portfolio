@@ -2,7 +2,7 @@
   <div class="inner">
     <div class="form__wrapper">
     
-      <%= form_with model: @post, url: posts_path, local: true do |f| %>
+      <%= form_with model: @form, url: post_path, method: :patch, local: true do |f| %>
         <div class="field">
           <div class="image-field">
             <%= f.file_field :images, multiple: true %>
@@ -52,11 +52,11 @@
           <div class="field-bold-text">
             <%= f.label :tagname, "タグ(タグ同士の間には半角の「,」を入れてください)：" %>
           </div>
-          <%= f.text_field :tagname, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
+          <%= f.text_field :tagname, value: @tag_list, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
         </div>
 
         <div class="actions">
-          <%= f.submit "投稿", class: :form_btn %>
+          <%= f.submit "保存", class: :form_btn %>
         </div>
       <% end %>
     </div>
