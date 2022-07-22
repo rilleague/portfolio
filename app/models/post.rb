@@ -1,7 +1,8 @@
 class Post < ApplicationRecord
-  belongs_to :user
   mount_uploaders :images, ImageUploader
   serialize :images, JSON
+  belongs_to :user
+  has_many :comments
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   extend ActiveHash::Associations::ActiveRecordExtensions
