@@ -1,18 +1,26 @@
 class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
+    @comment.post_id = @post.id
     if @comment.save
-      redirect_to post_path(@comment.post)
+      # コメントをした詳細ページに遷移し、フラッシュメッセージを表示させる。
+      redirect_to post_path(@post), notice: 'コメントを投稿しました'
     else
-      @comments = @post.comments.includes(:user)
-      render "posts/#{@post.id}"
+      render "posts/show"
     end
+  end
+
+  def destroy
+    Comment.find_by(id: params[:id], post_id: params[:post_id]).destroy
+    redirect_to post_path(params[:post_id]), alert: 'コメントを削除しました'
   end
 
 
   private
+
   def comment_params
-    params.require(:comment).permit(:content).merge(post_id: params[:post_id], user_id: current_user.id)
+    params.require(:comment).permit(:content)
   end
+
 end
