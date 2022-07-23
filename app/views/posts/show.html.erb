@@ -46,25 +46,30 @@
       <%# コメント投稿&内容表示 %>
       <div class="detail-post-comments">
         <% if user_signed_in? %>
-          <%= form_with(model: [@post,@comment],local: true) do |f| %>
-            <div class="comment-field">
-              <%= f.text_field :content, id:"comment_content"%>
-            </div>
-            <div class="comment-actions">
-              <%= f.submit "コメント投稿", class: :form__btn %>
-            </div>
+          <%= form_with(model:[@post, @comment], local: true) do |f| %>
+            <%# エラーメッセージ表示 %>
+            <%= render 'layouts/error_messages', model: f.object %>
+            <%= f.text_area :content, row:'5', placeholder: "コメントを入力", id:"comment_content"%>
+            <%= f.submit "送信する", class: :form__btn %>
           <% end %>
         <% end %>
-        <div class="comments_lists">
-          <h4>＜コメント＞</h4>
-          <% @comments.each do |comment| %>
-            <p class="comments_list">
-              <%# コメントしたユーザーのマイページに飛べるように、link_toを用いる。 %>
-              <strong><%= link_to comment.user.nickname, "#", class: :comment_user %>:</strong>
-              <%= comment.content %>
-            </p>
+      </div>
+      <%# コメント一覧表示 %>
+      <div class="comments_lists">
+        <% if @post.comments.present? %>
+          <p>コメント件数：<%= @post.comments.count %></p>
+          <% @post.comments.each do |comment| %>
+            <strong><%= link_to comment.user.nickname, "#", class: :comment_user %>:</strong>
+            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
+            <% if comment.user == current_user %>
+              <div class="comment-delete">
+                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+              </div>
+            <% end %>
           <% end %>
-        </div>
+        <% else %>
+          <p>コメントはまだ有りません</p>
+        <% end %>
       </div>
     </div>
 

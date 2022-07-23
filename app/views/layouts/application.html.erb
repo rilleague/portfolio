@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%# ヘッダー %>
     <header class="header">
       <div class="nav">
         <div class="nav__left">
@@ -31,9 +32,13 @@
         <% end %>
       </div>
     </header>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%# メイン %>
+    <main class="main>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </main>
+    <%# フッター %>
     <footer class="footer">
       <p class="copyright">COPYRIGHT ©  Polishan Inc. All rights Reserved.</p>
     </footer>
