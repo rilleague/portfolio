@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
     if @comment.save
-      # コメントをした詳細ページに遷移し、フラッシュメッセージを表示させる。
       redirect_to post_path(@post), notice: 'コメントを投稿しました'
     else
       render "posts/show"
