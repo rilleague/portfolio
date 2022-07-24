@@ -49,7 +49,7 @@
     <% if user_signed_in? && current_user.id == @post.user.id %>
       <div class="action-lists">
         <div class="action-list">
-            <%= link_to '編集', edit_post_path(@post.user.id), method: :get, class:"action__btn" %><br>
+            <%= link_to '編集', edit_post_path(@post.id), method: :get, class:"action__btn" %><br>
             <%= link_to '削除', "#", method: :delete, class:"action__btn" %>
         </div>
       </div>

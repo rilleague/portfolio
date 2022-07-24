@@ -16,11 +16,11 @@ class PostsController < ApplicationController
 
   def create
     @post = PostForm.new(post_form_params)
-    tag_list = params[:post_form][:tagname].split(',')
+    tag_list = params[:post][:tagname].split(',')
     if @post.valid?
       # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
       @post.save(tag_list)
-      redirect_to "/posts?category_id=#{params[:post_form][:category_id]}"
+      redirect_to "/posts?category_id=#{@post.category_id}", notice: "保存しました。"
     else
       render :new
     end
@@ -34,17 +34,18 @@ class PostsController < ApplicationController
     # 各カラムの中に、paramsで受け取った投稿の中身を入れる
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:tagname).join(",")
-    @form = PostForm.new(title: @post.title, category_id: @post.category_id, part_id: @post.part_id, skin_id: @post.skin_id, detail: @post.detail, images: @post.images )
+    @form = PostForm.new(post: @post)
   end
 
   def update
     @post = Post.find(params[:id])
-    @form = PostForm.new(update_params)
-    tag_list = params[:post_form][:tagname].split(",")
+    @form = PostForm.new(update_params, post: @post)
+    tag_list = params[:post][:tagname].split(",")
+
     if @form.valid?
       #下記のupadateは、post_form.rbにて定義しているupdateメソッドである。
-      @form.update(tag_list)
-      redirect_to post_path(post.id)
+      @form.save(tag_list)
+      redirect_to edit_post_path(@post.id), notice: "更新しました。"
     else
       render :edit
     end
@@ -52,10 +53,10 @@ class PostsController < ApplicationController
 
   private
   def post_form_params
-    params.require(:post_form).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
   end
 
   def update_params
-    params.require(:post_form).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id, post_id: params[:id])
+    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
   end
 end
