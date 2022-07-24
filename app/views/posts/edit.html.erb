@@ -5,9 +5,16 @@
       <%= form_with model: @form, url: post_path, method: :patch, local: true do |f| %>
         <div class="field">
           <div class="image-field">
+            <p>画像を選択する</p>
             <%= f.file_field :images, multiple: true %>
           </div>
-          <p>画像を選択する</p>
+          
+          <div>
+            <p>現在設定中の画像↓</p>
+            <% @form.images.each do |image|%>
+              <%= image_tag image.to_s %>
+            <% end %>
+          </div>
         </div>
 
         <div class="field">
