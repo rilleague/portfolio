@@ -4,6 +4,10 @@
   flex-direction: column;
 } 
 
+a {
+  text-decoration: none;
+}
+
 /* ヘッダー */
 .header {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
@@ -101,9 +105,20 @@
   width: 15%;
 }
 
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .post-nickname {
   padding-bottom: 10px;
 }
+
+.unlike-btn {
+  color: #e54747;
+  font-size: 1em;
+}
+
 
 .post-image {
   text-align: center;
@@ -145,6 +160,11 @@
   height: 100vh;
   width: 70vw;
   padding: 20px 30px;
+}
+
+.detail-post-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .detail-post-username {
