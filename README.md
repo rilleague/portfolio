@@ -10,8 +10,8 @@
 ### association
 - has_many :posts
 - has_many :comments
-<!-- - has_many :favorites
-- has_many :relationships
+- has_many :favorites
+<!-- - has_many :relationships
 - has_many :followings, through: :relationships, source: :follow
 - has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
 - has_many :followers, through: :reverse_of_relationships, source: :user  -->
@@ -91,7 +91,7 @@
 
 
 
-## relationshipsテーブル
+<!-- ## relationshipsテーブル
 | Column             | Type          | Options                                        
 | ------------------ | ------------- | ---------------------------------------------- 
 | user               | references    | null: false, foreign_key: true, unique: true   
@@ -99,4 +99,4 @@
 
 ### association
 - belongs_to :user
-- belongs_to :follow, class_name: 'User' 
+- belongs_to :follow, class_name: 'User'  -->
