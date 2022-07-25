@@ -2,12 +2,20 @@
   <div class="inner">
     <div class="form__wrapper">
     
-      <%= form_with model: @post, url: posts_path, local: true do |f| %>
+      <%= form_with model: @form, url: post_path, method: :patch, local: true do |f| %>
         <div class="field">
+          <%# 画像をアップロードするアクションボタンを表示 %>
           <div class="image-field">
+            <p>画像を選択する</p>
             <%= f.file_field :images, multiple: true %>
           </div>
-          <p>画像を選択する</p>
+          <%# 現在選択中の画像を表示 %>
+          <div class="current-images">
+            <p>現在設定中の画像↓</p>
+            <% @form.images.each do |image|%>
+              <%= image_tag image.to_s %>
+            <% end %>
+          </div>
         </div>
 
         <div class="field">
@@ -52,11 +60,11 @@
           <div class="field-bold-text">
             <%= f.label :tagname, "タグ(タグ同士の間には半角の「,」を入れてください)：" %>
           </div>
-          <%= f.text_field :tagname, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
+          <%= f.text_field :tagname, value: @tag_list, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
         </div>
 
         <div class="actions">
-          <%= f.submit "投稿", class: :form_btn %>
+          <%= f.submit "保存", class: :form_btn %>
         </div>
       <% end %>
     </div>
