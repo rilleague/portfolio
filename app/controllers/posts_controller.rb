@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new, :show]
+  before_action :authenticate_user!, except: :index 
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :split_list, only: [:create, :update]
+  before_action :move_to_toppage, only: [:edit, :destroy]
 
   def index
     @category_id = params[:category_id]
@@ -16,11 +19,10 @@ class PostsController < ApplicationController
 
   def create
     @post = PostForm.new(post_form_params)
-    tag_list = params[:post_form][:tagname].split(',')
     if @post.valid?
       # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
       @post.save(tag_list)
-      redirect_to "/posts?category_id=#{params[:post_form][:category_id]}"
+      redirect_to "/posts?category_id=#{@post.category_id}", notice: "保存しました。"
     else
       render :new
     end
@@ -31,8 +33,50 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  private
-  def post_form_params
-    params.require(:post_form).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
+  def edit
+    # 各カラムの中に、paramsで受け取った投稿の中身を入れる
+    @tag_list = @post.tags.pluck(:tagname).join(",")
+    @form = PostForm.new(post: @post)
   end
+
+  def update
+    @form = PostForm.new(update_params, post: @post)
+    if @form.valid?
+      @form.save(tag_list)
+      redirect_to post_path(@post.id), notice: "更新しました。"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to root_path, alert: "削除しました。"
+  end
+
+  
+  private
+
+  def post_form_params
+    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
+  end
+
+  def update_params
+    params.require(:post).permit(:title, :category_id, :part_id, :skin_id, :detail, :tagname, { images: [] }).merge(user_id: current_user.id)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def split_list
+    tag_list = params[:post][:tagname].split(",")
+  end
+
+  def move_to_toppage
+    unless @post.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
+
 end
