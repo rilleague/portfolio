@@ -14,4 +14,9 @@ class User < ApplicationRecord
     # 同じニックネームは保存出来ない
     validates :nickname, uniqueness: true
   end
+
+  def favorite_find?(post_id)
+    # favoritesテーブルにpost_idが存在しているかを探す
+    favorites.where(post_id: post_id).exists?
+  end
 end
