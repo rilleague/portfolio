@@ -56,4 +56,9 @@ class PostForm
       PostTag.find_or_create_by(post_id: post.id, tag_id: tag.id) 
     end
   end
+
+  def destroy
+    form = Post.where(id: post_id)
+    form.destroy
+  end
 end
