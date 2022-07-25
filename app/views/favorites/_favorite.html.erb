@@ -1,0 +1,17 @@
+<% if !user_signed_in? %>
+  <%# ユーザーが未ログイン状態であれば、お気に入りボタン(can't push)と回数が表示されている。%>
+  <i class="far fa-heart like-btn"></i>
+  <%= @post.favorites.count %>
+<% elsif current_user.favorite_find?(@post) %>
+  <%# 現在ログイン中のユーザーが既にお気に入りした投稿の場合は、お気に入り状態のボタンと回数が表示される。 %>
+  <%= link_to post_favorite_path(@post, @post.favorites), class: "favorite-link", method: :delete, remote: true do %>
+    <i class="fas fa-heart unlike-btn"></i>
+  <% end %>
+  <%= @post.favorites.count %>
+<% else %>
+  <%# ユーザーがログイン状態で有れば、未お気に入り状態のボタンを押すと、お気に入りに保存される。 %>
+  <%= link_to post_favorites_path(@post), class: "favorite-link", method: :post, remote: true do %>
+    <i class="far fa-heart like-btn"></i>
+  <% end %>
+  <%= @post.favorites.count %>
+<% end %>
