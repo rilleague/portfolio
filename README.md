@@ -79,7 +79,7 @@
 
 
 
-<!-- ## favoritesテーブル
+## favoritesテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | null: false, foreign_key: true |
@@ -87,7 +87,7 @@
 
 ### association
 - belongs_to :user
-- belongs_to :post -->
+- belongs_to :post
 
 
 
