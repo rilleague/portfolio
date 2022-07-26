@@ -1,9 +1,16 @@
 <div class="detail-page">
   <div class="detail-page-contents">
     <div class="detail-post">
-      <%# ニックネーム表示 %>
-      <div class="detail-post-username">
-        <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
+
+      <div class="detail-post-header">
+        <%# ニックネーム表示 %>
+        <div class="detail-post-username">
+          <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
+        </div>
+        <%# いいねボタンの表示 %>
+        <div id = "post_<%= @post.id %>">
+          <%= render partial: "favorites/favorite", locals: { post: @post }%>
+        </div>
       </div>
 
       <%# 画像を３枚表示 ※画像が保存されていない場合は、ダミー画像を表示%>
@@ -72,6 +79,7 @@
         <% end %>
       </div>
     </div>
+
     <%# 編集・削除アクションボタンの表示 %>
     <% if user_signed_in? && current_user.id == @post.user.id %>
       <div class="action-lists">

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :post
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -11,5 +13,10 @@ class User < ApplicationRecord
     validates_format_of :password, with: PASSWORD_REGEX
     # 同じニックネームは保存出来ない
     validates :nickname, uniqueness: true
+  end
+
+  def favorite_find?(post_id)
+    # favoritesテーブルにpost_idが存在しているかを探す
+    favorites.where(post_id: post_id).exists?
   end
 end
