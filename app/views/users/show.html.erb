@@ -1,0 +1,57 @@
+<div class="profile-page">
+  <div class="profile-contents">
+    <div class="profile-content">
+      <%# マイページの上部を表示 %>
+      <div class="wrap-top">
+        <%# アイコン画像と編集ページへのリンクボタンを表示 %>
+        <div class="user-sub">
+          <%# アイコン画像を表示 %>
+          <div class="profile-field-img">
+            <p class="profile-img">
+              <% if @user.avatar? %>
+                <%= image_tag @user.avatar.url, size: "180x180", class: "edit-avatar" %>
+              <% else %>
+               <%= image_tag "default-image.png", size: "180x180", class: "edit-avatar" %>
+              <% end %>
+            </p>
+          </div>
+          <%# ユーザー編集ページに遷移するボタンを表示 %>
+          <div class="profile-edit-btn">
+            <p class="mypage-btn">
+              <%= link_to "プロフィール編集", edit_user_path(@user), class: "profile__btn" %>
+            </p>
+          </div>
+        </div>
+        <div class="user-main">
+          <%# ユーザー名、年齢、総いいね数を表示 %>
+          <div class="profile-field">
+          </div>
+          <%# 自己紹介を表示 %>
+          <div class="profile-field-intro">
+          </div>
+        </div>
+      </div>
+      <%# マイページの下部を表示 %>
+      <div class="wrap-bottom">
+        <div class="user-menu">
+          <nav class="menu-bar">
+            <div class="user-post">
+              <ul class="menu-list">
+                <li class="menu"></li>
+                <li class="menu"></li>
+              </ul>
+            </div>
+            <div class="user-follow">
+              <ul class="menu-list">
+                <li class="menu"></li>
+                <li class="menu"></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="user-content">
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
