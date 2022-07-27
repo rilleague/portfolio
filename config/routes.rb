@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'favorites/destroy'
   devise_for :users
   root to: 'pages#index'
-  resources :users, only: :show
+  resources :users, only: [:show, :edit, :update]
   resources :posts do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
