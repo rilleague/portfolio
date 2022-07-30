@@ -1,38 +1,45 @@
 <div class="user-profile">
   <div class="edit-user">
     <h2 class="edit-title">プロフィール編集</h2>
-    <div class="edit-user-form">
-      <%= form_with model: @user, url: user_path, method: :patch, local: true do |f| %>
-        <%# アイコン画像を編集 %>
-        <div class="edit-field-img">
+    <div class="edit-profile">
+      <%= form_with model: @user, url: user_path(@user.id), method: :patch, local: true do |f| %>
+      <div class="edit-main">
+        <div class="edit-left">
           <%# 選択中のアイコン画像を表示 %>
-          <% if @user.avatar? %>
-            <%= image_tag f.avatar.url, size: "300x300", class: "edit-avatar" %>
-          <% else %>
-            <%= image_tag "default-image.png", size: "300x300", class: "edit-avatar" %>
-          <% end %>
+          <div class="avatar-img">
+            <% if @user.avatar? %>
+              <%= image_tag @user.avatar.url, size: "450x450", class: "edit-avatar" %>
+            <% else %>
+              <%= image_tag "default-image.png", size: "450x450", class: "edit-avatar" %>
+            <% end %>
+          </div>
           <%# 画像を選択するボタンを表示 %>
-          <%= f.file_field :avatar %>
+          <p class="avatar-btn">
+            <%= f.file_field :avatar %>
+          </p>
         </div>
-        <%# ニックネームを編集 %>
-        <div class="edit-field">
-          <%= f.label :nickname, "ニックネーム" %>
-          <%= f.text_field :nickname, class: "edit-nickname", id:"edit__nickname"%>
+        <div class="edit-right">
+          <%# ニックネームを編集 %>
+          <div class="edit-field">
+            <%= f.label :nickname, "ニックネーム" %>
+            <%= f.text_field :nickname, class: "edit-nickname", id:"edit__nickname"%>
+          </div>
+          <%# 年齢を編集 %>
+          <div class="edit-field">
+            <%= f.label :age_id, "年齢" %>
+            <%= f.collection_select(:age_id, Age.all, :id, :name, {}, {class: "edit-age"})%>
+          </div>
+          <%# 自己紹介を編集 %>
+          <div class="edit-field">
+            <%= f.label :introduction, "自己紹介" %>
+            <%= f.text_area :introduction, placeholder: "自己紹介を記入しましょう", maxlength: "300", class: "edit-introduction", id:"edit__introduction"%>
+          </div>
+          <%# 保存ボタン %>
+          <div class="edit-action">
+            <%= f.submit "保存", class: "edit-btn" %>
+          </div>
         </div>
-        <%# 年齢を編集 %>
-        <div class="edit-field">
-          <%= f.label :age_id, "年齢" %>
-          <%= f.collection_select(:age_id, Age.all, :id, :name, {}, {class: "edit-age"})%>
-        </div>
-        <%# 自己紹介を編集 %>
-        <div class="edit-field">
-          <%= f.label :introduction, "自己紹介" %>
-          <%= f.text_area :introduction, placeholder: "自己紹介を記入しましょう", maxlength: "300", class: "edit-introduction", id:"edit__introduction"%>
-        </div>
-        <%# 保存ボタン %>
-        <div class="edit-action">
-          <%= f.submit "保存", class: "edit-btn" %>
-        </div>
+      </div>
       <% end %>
     </div>
   </div>
