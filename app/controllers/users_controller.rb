@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show
+    @posts = @user.posts
+    @favorite_count = 0
+    @posts.each do |post|
+      @favorite_count += post.favorites.count
+    end
+    @post1 = Post.where(category_id: "2", user_id: @user.id).order("created_at DESC")
+    @post2 = Post.where(category_id: "3", user_id: @user.id).order("created_at DESC")
   end
 
   def edit
