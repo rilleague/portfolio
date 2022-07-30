@@ -4,52 +4,85 @@
       <%# マイページの上部を表示 %>
       <div class="wrap-top">
         <%# アイコン画像と編集ページへのリンクボタンを表示 %>
-        <div class="user-sub">
+        <div class="user-left">
           <%# アイコン画像を表示 %>
           <div class="profile-field-img">
             <p class="profile-img">
-              <% if @user.avatar? %>
-                <%= image_tag @user.avatar.url, size: "180x180", class: "edit-avatar" %>
+              <% if @user.avatar.present? %>
+                <%= image_tag @user.avatar.url, size: "180x180", class: "profile-avatar" %>
               <% else %>
-               <%= image_tag "default-image.png", size: "180x180", class: "edit-avatar" %>
+               <%= image_tag "default-image.png", size: "180x180", class: "profile-avatar" %>
               <% end %>
             </p>
           </div>
           <%# ユーザー編集ページに遷移するボタンを表示 %>
           <div class="profile-edit-btn">
-            <p class="mypage-btn">
-              <%= link_to "プロフィール編集", edit_user_path(@user), class: "profile__btn" %>
-            </p>
+            <%= link_to "プロフィール編集", edit_user_path(@user), class: "profile-btn" %>
           </div>
         </div>
-        <div class="user-main">
+        <div class="user-center">
           <%# ユーザー名、年齢、総いいね数を表示 %>
-          <div class="profile-field">
+          <div class="profile-nickname">
+            <p class="prof_name">
+              <%= @user.nickname %>
+            </p>
           </div>
+          <div class="profile-age">
+            <p class="prof_age">
+              <% if @user.age.present? %>
+                <%= @user.age.name %>
+              <% end %>
+            </p>
+          </div>
+          <div class="profile-favo">
+            <i class="fas fa-heart unlike-btn2"></i>
+            <span class="favorite-count"><%= @favorite_count %></span>
+          </div>
+        </div>
+        <div class="user-right">
           <%# 自己紹介を表示 %>
           <div class="profile-field-intro">
+            <p class="prof_intro">
+              <% if @user.introduction.present? %>
+                <%= @user.introduction %>
+              <% end %>
+            </p>
           </div>
         </div>
       </div>
       <%# マイページの下部を表示 %>
       <div class="wrap-bottom">
-        <div class="user-menu">
-          <nav class="menu-bar">
-            <div class="user-post">
-              <ul class="menu-list">
-                <li class="menu"></li>
-                <li class="menu"></li>
-              </ul>
-            </div>
-            <div class="user-follow">
-              <ul class="menu-list">
-                <li class="menu"></li>
-                <li class="menu"></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div class="user-content">
+        <%# タブ部分 %>
+        <ul class="tab-list">
+          <li class="tab tab-active">
+            美容投稿
+          </li>
+          <li class="tab">
+            お悩み投稿
+          </li>
+          <li class="tab">
+            <span class="follow-count">120</span>
+            <span class="follow-menu">フォロー</span>
+          </li>
+          <li class="tab">
+            <span class="follow-count">120</span>
+            <span class="follow-menu">フォロワー</span>
+          </li>
+        </ul>
+        <%# タブで選択されて表示されるコンテンツ %>
+        <div class="tabbox-contents">
+          <div class="tabbox box-show">
+            <%# 美容投稿コンテンツを表示 %>
+            <%= render partial: "contents", locals: { posts: @post1 } %>
+          </div>
+          <div class="tabbox">
+            <%# お悩み投稿コンテンツを表示 %>
+            <%= render partial: "contents", locals: { posts: @post2 } %>
+          </div>
+          <div class="tabbox">
+          </div>
+          <div class="tabbox">
+          </div>
         </div>
       </div>
     </div>
