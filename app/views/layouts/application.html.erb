@@ -21,7 +21,7 @@
             <%= link_to "投稿する", new_post_path, class: "post" %>
             <%= link_to current_user.nickname, "#" %>
             <%= link_to "ログアウト", destroy_user_session_path , method: :delete %>
-            <%# <%= link_to "マイページ", "#" %>
+            <%= link_to "マイページ", user_path(current_user.id) %>
             <%# <%= link_to "カレンダー", "#" %>
           </div>
         <% else %>

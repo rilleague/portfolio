@@ -1,11 +1,14 @@
 # README
 
 ## usersテーブル
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |
-| email              | string | null: false               |
-| encrypted_password | string | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false, unique: true |
+| email              | string  | null: false               |
+| age_id             | integer |                           |
+| avatar             | string  |                           |
+| introduction       | text    |                           |
+| encrypted_password | string  | null: false               |
 
 ### association
 - has_many :posts

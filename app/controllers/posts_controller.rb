@@ -19,6 +19,7 @@ class PostsController < ApplicationController
 
   def create
     @post = PostForm.new(post_form_params)
+    tag_list = params[:post][:tagname].split(',')
     if @post.valid?
       # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
       @post.save(tag_list)
@@ -29,8 +30,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comment = Comment.new
+    @user = @post.user
   end
 
   def edit
@@ -41,6 +42,7 @@ class PostsController < ApplicationController
 
   def update
     @form = PostForm.new(update_params, post: @post)
+    tag_list = params[:post][:tagname].split(",")
     if @form.valid?
       @form.save(tag_list)
       redirect_to post_path(@post.id), notice: "更新しました。"

@@ -3,13 +3,26 @@
     <div class="detail-post">
 
       <div class="detail-post-header">
-        <%# ニックネーム表示 %>
-        <div class="detail-post-username">
-          <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
-        </div>
+        <%# アイコン・ニックネーム表示 %>
+        <%= link_to user_path(@post.user.id) do %>
+          <div class="detail-user">
+            <div class="detail-post-avator">
+              <% if @user.avatar.present? %>
+                <%= image_tag @user.avatar.url, size: "70x70", class: "post-avatar" %>
+              <% else %>
+                <%= image_tag "default-image.png", size: "70x70", class: "post-avatar" %>
+              <% end %>
+            </div>
+            <div class="detail-post-nickname">
+              <%= @user.nickname %>
+            </div>
+          </div>
+        <% end %>
         <%# いいねボタンの表示 %>
-        <div id = "post_<%= @post.id %>">
-          <%= render partial: "favorites/favorite", locals: { post: @post }%>
+        <div class="like">
+          <div id = "post_<%= @post.id %>">
+            <span class="like-btn"><%= render partial: "favorites/favorite", locals: { post: @post } %></span>
+          </div>
         </div>
       </div>
 
@@ -51,32 +64,34 @@
       </div>
 
       <%# コメント投稿&内容表示 %>
-      <div class="detail-post-comments">
-        <% if user_signed_in? %>
-          <%= form_with(model:[@post, @comment], local: true) do |f| %>
-            <%# エラーメッセージ表示 %>
-            <%= render 'layouts/error_messages', model: f.object %>
-            <%= f.text_area :content, row:'5', placeholder: "コメントを入力", id:"comment_content"%>
-            <%= f.submit "送信する", class: :form__btn %>
-          <% end %>
-        <% end %>
-      </div>
-      <%# コメント一覧表示 %>
-      <div class="comments_lists">
-        <% if @post.comments.present? %>
-          <p>コメント件数：<%= @post.comments.count %></p>
-          <% @post.comments.each do |comment| %>
-            <strong><%= link_to comment.user.nickname, "#", class: :comment_user %>:</strong>
-            <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
-            <% if comment.user == current_user %>
-              <div class="comment-delete">
-                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-              </div>
+      <div class="comment-form">
+        <div class="detail-post-comments">
+          <% if user_signed_in? %>
+            <%= form_with(model:[@post, @comment], local: true) do |f| %>
+              <%# エラーメッセージ表示 %>
+              <%= render 'layouts/error_messages', model: f.object %>
+              <%= f.text_area :content, row:'5', placeholder: "コメントを入力", id:"comment_content"%>
+              <%= f.submit "送信する", class: :form__btn %>
             <% end %>
           <% end %>
-        <% else %>
-          <p>コメントはまだ有りません</p>
-        <% end %>
+        </div>
+        <%# コメント一覧表示 %>
+        <div class="comments_lists">
+          <% if @post.comments.present? %>
+            <p>コメント件数：<%= @post.comments.count %></p>
+            <% @post.comments.each do |comment| %>
+              <strong><%= link_to comment.user.nickname, "#", class: :comment_user %>:</strong>
+              <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
+              <% if comment.user == current_user %>
+                <div class="comment-delete">
+                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>コメントはまだ有りません</p>
+          <% end %>
+        </div>
       </div>
     </div>
 
