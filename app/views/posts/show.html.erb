@@ -3,13 +3,26 @@
     <div class="detail-post">
 
       <div class="detail-post-header">
-        <%# ニックネーム表示 %>
-        <div class="detail-post-username">
-          <%= link_to @post.user.nickname, "#", class:"post__nickname" %>さん
-        </div>
+        <%# アイコン・ニックネーム表示 %>
+        <%= link_to user_path(@post.user.id) do %>
+          <div class="detail-user">
+            <div class="detail-post-avator">
+              <% if @user.avatar.present? %>
+                <%= image_tag @user.avatar.url, size: "70x70", class: "post-avatar" %>
+              <% else %>
+                <%= image_tag "default-image.png", size: "70x70", class: "post-avatar" %>
+              <% end %>
+            </div>
+            <div class="detail-post-nickname">
+              <%= @user.nickname %>
+            </div>
+          </div>
+        <% end %>
         <%# いいねボタンの表示 %>
-        <div id = "post_<%= @post.id %>">
-          <%= render partial: "favorites/favorite", locals: { post: @post }%>
+        <div class="like">
+          <div id = "post_<%= @post.id %>">
+            <span class="like-btn"><%= render partial: "favorites/favorite", locals: { post: @post } %></span>
+          </div>
         </div>
       </div>
 
