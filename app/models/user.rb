@@ -7,12 +7,14 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :post
-  # Userがたくさんの人をフォローしている
-  has_many :following_relationships, class_name: "Relationships", foreign_key: "follower_id", dependent: :destroy
-  has_many :followings, through: :following_relationships, source: :following
-  # Userがたくさんのフォロワーにフォローされている
-  has_many :follower_relationships, class_name: "Relationships", foreign_key: "following_id", dependent: :destroy
-  has_many :followers, through: :follower_relationships, source: :follower
+  # (フォローする側から、)中間テーブルを通して、フォローされる側を取得する
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # (フォローされる側から、)中間テーブルを通して、フォローしてくる側を取得する
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 中間テーブルを通してfollowedモデルのフォローされる側を取得すること
+  has_many :following_user, through: :follower, source: :followed  #自分がフォローしている人
+  # 中間テーブルを通してfollowerモデルのフォローする側を取得すること
+  has_many :follower_user, through: :followed, source: :follower   #自分をフォローしている人
 
 
   devise :database_authenticatable, :registerable,
@@ -33,18 +35,18 @@ class User < ApplicationRecord
     favorites.where(post_id: post_id).exists?
   end
 
-  # フォローした時の処理
-  def follow(user)
-    following_relationships.create!(following_id: user.id)
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
   end
 
-  # フォローを外した時の処理
-  def unfollow(user)
-    following_relationships.find_by(following_id: user.id).destroy
+  # ユーザーのフォローを外す
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
   end
 
-  # フォローをしているか判定する処理
+  # フォローしていればtrueを返り値で渡す
   def following?(user)
-    following_relationships.find_by(following_id: user.id)
+    following_user.include?(user)
   end
 end
