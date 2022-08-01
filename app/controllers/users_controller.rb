@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :followings, :followers]
+  before_action :set_user, only: [:show, :edit, :update]
 
   def show
     @posts = @user.posts
@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     end
     @post1 = Post.where(category_id: "2", user_id: @user.id).order("created_at DESC")
     @post2 = Post.where(category_id: "3", user_id: @user.id).order("created_at DESC")
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def edit
@@ -24,17 +26,15 @@ class UsersController < ApplicationController
   end
 
   # 自分がフォローしているユーザーを表示するメソッドを定義
-  def followings
-    # @user = User.find(params[:id])
-    @users = @user.followings
-    render "show_follower"
+  def follows
+    user = User.find(params[:id])
+    @users = user.following_user.order("created_at DESC")
   end
 
   # 自分をフォローしているユーザーを表示するメソッドを定義
   def followers
-    # @user = User.find(params[:id])
-    @users = @user.followers
-    render "show_follower"
+    user = User.find(params[:id])
+    @users = user.follower_user.order("created_at DESC")
   end
 
   private
