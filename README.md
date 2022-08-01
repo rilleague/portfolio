@@ -95,11 +95,11 @@
 
 
 ## relationshipsテーブル
-| Column             | Type          | Options                                        
-| ------------------ | ------------- | ---------------------------------------------- 
-| follower            | references    | null: false, foreign_key: true, unique: true   
-| followed           | references    | null: false, foreign_key: { to_table: :users } 
+| Column             | Type          | Options                          
+| ------------------ | ------------- | ---------------------------------
+| follower           | references    | foreign_key: { to_table: :users }   
+| following          | references    | foreign_key: { to_table: :users } 
 
 ### association
 - belongs_to :follower, class_name: 'User' 
-- belongs_to :followed, class_name: 'User' 
+- belongs_to :following, class_name: 'User' 
