@@ -1,5 +1,5 @@
 // マイページのタグ切り替え
-$(function() {
+$(document).on('turbolinks:load', function () {
   let tabs = $(".tab");
   // クラス名"tab"がclickされたら、
   $('.tab').on('click', function() {
