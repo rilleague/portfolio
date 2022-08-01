@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   root to: 'pages#index'
   resources :users, only: [:show, :edit, :update] do
     member do
-      get :followings, :followers
+      get :follows, :followers
     end
+    resource :relationships, only: [:create, :destroy]
   end
-  resources :relationships, only: [:create, :destroy]
   resources :posts do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
