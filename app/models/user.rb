@@ -7,6 +7,13 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :post
+  # Userがたくさんの人をフォローしている
+  has_many :following_relationships, class_name: "Relationships", foreign_key: "follower_id", dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :following
+  # Userがたくさんのフォロワーにフォローされている
+  has_many :follower_relationships, class_name: "Relationships", foreign_key: "following_id", dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -24,5 +31,20 @@ class User < ApplicationRecord
   def favorite_find?(post_id)
     # favoritesテーブルにpost_idが存在しているかを探す
     favorites.where(post_id: post_id).exists?
+  end
+
+  # フォローした時の処理
+  def follow(user)
+    following_relationships.create!(following_id: user.id)
+  end
+
+  # フォローを外した時の処理
+  def unfollow(user)
+    following_relationships.find_by(following_id: user.id).destroy
+  end
+
+  # フォローをしているか判定する処理
+  def following?(user)
+    following_relationships.find_by(following_id: user.id)
   end
 end
