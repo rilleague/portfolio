@@ -281,17 +281,21 @@ a {
   width: 20%;
 }
 
+.profile-favo {
+  margin-bottom: 15px;
+}
+
 .unlike-btn2 {
   color: #e54747;
-  font-size: 55px;
+  font-size: 40px;
 }
 
 .favorite-count {
-  font-size: 50px;
+  font-size: 30px;
 }
 
 .prof_name {
-  color: #2699FB;
+  color: #7AC2DD;
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 0%;
@@ -309,6 +313,22 @@ a {
   border-radius: 50%;
   object-fit: cover;
   border: 5px solid #7AC2DD;
+}
+
+/* フォローボタン */
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #7AC2DD;
+  border: solid 4px #7AC2DD;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.btn-flat-border:hover {
+  background: #7AC2DD;
+  color: white;
 }
 
 .user-right {
@@ -332,7 +352,6 @@ a {
 
 .wrap-bottom {
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
-  height: 100%;
   width: 100%;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -341,6 +360,7 @@ a {
 .tab-list {
   display: flex;
   width: 100%;
+  padding-left: 0px;
 }
 
 .tab {
@@ -373,10 +393,76 @@ a {
 }
 
 /* hover時のアクション */
-.tab:hover{
+.tab:hover {
   box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);
 }
+
+.tabbox-contents {
+  height: 100%;
+  overflow: scroll;
+}
+
+.follow-user {
+  display: flex;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+  height: 130px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding-top: 5px;
+}
+
+.follow-user:hover {
+  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.follow-left {
+  text-align: center;
+  margin: 0 30px 0 60px;
+}
+
+.follow__avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #7AC2DD;
+}
+
+.follow-center {
+  margin-right: 60px;
+  width: 150px;
+}
+
+.follow_name {
+  color: #7AC2DD;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.follow-user-age {
+  font-size: 13px;
+  color: black;
+}
+
+.follow-right {
+  width: 60%;
+  height: 100%;
+}
+
+.follow-field-intro {
+  border: 3px solid #7AC2DD;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.follow_intro {
+  font-size: 15px;
+  color: black;
+}
+
 
 /* プロフィール編集画面 */
 .user-profile {
