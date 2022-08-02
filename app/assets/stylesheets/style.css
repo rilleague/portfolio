@@ -1,3 +1,12 @@
+/* リセットCSS */
+* {
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
 .body {
   width: 100%;
   height: 100%;
@@ -68,7 +77,6 @@ a {
 .footer {
   width: 100%;
   height: 50px;
-  position: absolute;
 }
 
 .copyright {
@@ -160,19 +168,37 @@ a {
   height: 100vh;
   width: 70vw;
   padding: 20px 30px;
+  overflow: scroll;
 }
 
 .detail-post-header {
+  width: 950px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.detail-post-username {
-  margin-bottom: 20px;
+.detail-user {
+  width: 95%;
+  display: flex;
+  align-items: center;
 }
 
-.post__nickname {
-  text-decoration: none;
+.post-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #7AC2DD;
+  margin-right: 5px;
+}
+
+.detail-post-nickname {
+  font-size: 22px;
+  width: 100%;
+}
+
+.like {
+  width: 5%;
+  font-size: 21px;
 }
 
 .detail-post-images {
@@ -199,8 +225,217 @@ a {
   border: 1px solid #b2b3b6;
 }
 
-.detail-post-comments {
+.comment-form {
   border: 1px solid #b2b3b6;
+  border-top: 20px;
+}
+
+.detail-post-comments {
   margin: 20px 0 40px 0;
   padding: 20px 10px;
+}
+
+/* プロフィール画面 */
+.profile-page {
+  background-color: #7AC2DD;
+  height: 100%;
+  width: 100vw;
+}
+
+.profile-contents {
+  height: 1500px;
+  margin: 30px;
+  padding: 50px 30px;
+}
+
+.profile-content {
+  background-color: #FFFFFF;
+  height: 100%;
+  overflow: scroll;
+  border: 5px solid #FFFFFF;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.wrap-top {
+  display: flex;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+  height: 300px;
+  padding: 15px 50px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.user-left {
+  text-align: center;
+  margin: 13px 60px 0 0;
+}
+
+.profile-btn {
+  color: #2699FB;
+}
+
+.user-center {
+  margin-right: 60px;
+  width: 20%;
+}
+
+.unlike-btn2 {
+  color: #e54747;
+  font-size: 55px;
+}
+
+.favorite-count {
+  font-size: 50px;
+}
+
+.prof_name {
+  color: #2699FB;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 0%;
+}
+
+.profile-age {
+  margin-bottom: 35px;
+}
+
+.prof_age {
+  font-size: 15px;
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #7AC2DD;
+}
+
+.user-right {
+  width: 60%;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.profile-field-intro {
+  border: 5px solid #7AC2DD;
+  width: 100%;
+  height: 63%;
+  border-radius: 10px;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.prof_intro {
+  font-size: 18px;
+}
+
+.wrap-bottom {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.tab-list {
+  display: flex;
+  width: 100%;
+}
+
+.tab {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-left: solid 1px #CCC;
+  border-bottom: solid 1px #CCC;
+}
+
+.tab:first-child {
+  border-left: none;
+}
+
+.tab-active {
+  width: 100%;
+  color: #FFF;
+  background: #7AC2DD;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabbox {
+  display: none;
+  padding: 15px;
+}
+
+/* box-showクラスのものだけ表示 */
+.box-show {
+  display: block;
+}
+
+/* hover時のアクション */
+.tab:hover{
+  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+/* プロフィール編集画面 */
+.user-profile {
+  background-color: #7AC2DD;
+  height: 100%;
+  width: 100vw;
+}
+
+.edit-user {
+  height: 1000px;
+  margin: 30px;
+  padding: 50px 30px;
+}
+
+.edit-title {
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.edit-profile {
+  background-color: #FFFFFF;
+  height: 800px;
+  border: 5px solid #FFFFFF;
+  border-radius: 10px;
+  padding: 70px;
+  color: #0d0d0d;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.edit-main {
+  display: flex;
+}
+
+.edit-left{
+  text-align: center;
+  margin: 40px 30px 0 0;
+}
+
+.edit-right{
+  margin-top: 40px;
+}
+
+.edit-introduction {
+  height: 150px;
+  width: 500px;
+}
+
+.edit-age, .edit-nickname {
+  height: 40px;
+  width: 200px;
+}
+
+.edit-field {
+  margin-bottom: 50px;
+}
+
+.edit-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #7AC2DD;
 }

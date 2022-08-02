@@ -1,14 +1,7 @@
-<div class="main-contents">
-  <h2 class="new-post_page">
-    <% if @category_id == "2"%>
-      美容投稿
-    <% else %>
-      お悩み投稿
-    <% end %>
-  </h2>
-  <div class="post-contents">
+<%# "posts/index.html.erb"の記述から抜粋 %>
+<div class="post-contents">
     <ul class="post-lists">
-      <% @posts.each do |post| %>
+      <% posts.each do |post| %>
       <li class="list">
       <%= link_to post_path(post.id) do %>
         <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
@@ -53,4 +46,3 @@
       <% end %>
     </ul>
   </div>
-</div>
