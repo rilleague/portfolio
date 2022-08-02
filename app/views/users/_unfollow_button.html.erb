@@ -1,0 +1,4 @@
+<%# フォローボタン %>
+<%= form_for(current_user, url: user_relationships_path(@user.id), method: :delete, remote: true) do |f| %>
+  <%= f.submit "フォロー解除", class: "btn-flat-border" %>
+<% end %>
