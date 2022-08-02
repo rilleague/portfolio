@@ -1,1 +1,1 @@
-$("#follow-button-<%= @user.id %>").html("<%= j(render partial: "follow_button", locals: { user: @user }) %>");
+$("#follow-form").html("<%= j(render("users/follow_button")) %>");
