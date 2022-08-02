@@ -40,15 +40,15 @@
             <i class="fas fa-heart unlike-btn2"></i>
             <span class="favorite-count"><%= @favorite_count %></span>
           </div>
-          <div id="follow-button-<%= @user.id %>">
-            <% if current_user != @user %>
+          <% if user_signed_in? && @user != current_user %>
+            <div id="follow-form">
               <% if current_user.following?(@user) %>
-                <%= render partial: "relationships/unfollow_button", locals: { user: @user } %>
+                <%= render "unfollow_button" %>
               <% else %>
-                <%= render partial: "relationships/follow_button", locals: { user: @user } %>
+                <%= render "follow_button" %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
         <div class="user-right">
           <%# 自己紹介を表示 %>
