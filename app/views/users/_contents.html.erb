@@ -1,48 +1,48 @@
 <%# "posts/index.html.erb"の記述から抜粋 %>
 <div class="post-contents">
-    <ul class="post-lists">
-      <% posts.each do |post| %>
-      <li class="list">
-      <%= link_to post_path(post.id) do %>
-        <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
-        <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
-        <div class="post-header">
-          <div class="post-nickname">
-            <% if post.user.avatar.present? %>
-              <%= image_tag post.user.avatar.url, size: "40x40", class: "post-avatar" %>
-            <% else %>
-              <%= image_tag "default-image.png", size: "40x40", class: "post-avatar" %>
-            <% end %>
-          </div>
-          <div class="post-favorites">
-            <i class="fas fa-heart unlike-btn"></i>
-            <%= post.favorites.count %>
-          </div>
-        </div>
-        <%# ３枚の画像のうち、最初の一枚目を表示 %>
-        <div class="post-image">
-        <% if post.images[0] != nil%>
-          <% post.images.each do |image|%>
-            <%= image_tag image.to_s, size: "100x100" %>
-            <% break %>
-          <% end %>
-        <% else %>
-        <%# 投稿画像が一枚も無ければ、ダミー画像を表示 %>
-          <%= image_tag("noimage.png", size: "100x100",class:"no-image") %>
-        <% end %>
-        </div>
-        <%# 各投稿のタイトル表示 %>
-        <div class="post-title">
-          <b><%= post.title %></b>
-        </div>
-        <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
-        <div class=“post-tags”>
-          <% post.tags.each do |n| %>
-            <div class=“tag-name”>#<%= n.tagname %></div>
+  <ul class="post-lists">
+    <% posts.each do |post| %>
+    <li class="list">
+    <%= link_to post_path(post.id) do %>
+      <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
+      <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
+      <div class="post-header">
+        <div class="post-nickname">
+          <% if post.user.avatar.present? %>
+            <%= image_tag post.user.avatar.url, size: "40x40", class: "post-avatar" %>
+          <% else %>
+            <%= image_tag "default-image.png", size: "40x40", class: "post-avatar" %>
           <% end %>
         </div>
+        <div class="post-favorites">
+          <i class="fas fa-heart unlike-btn"></i>
+          <%= post.favorites.count %>
+        </div>
+      </div>
+      <%# ３枚の画像のうち、最初の一枚目を表示 %>
+      <div class="post-image">
+      <% if post.images[0] != nil%>
+        <% post.images.each do |image|%>
+          <%= image_tag image.to_s, size: "100x100" %>
+          <% break %>
         <% end %>
-      </li>
+      <% else %>
+      <%# 投稿画像が一枚も無ければ、ダミー画像を表示 %>
+        <%= image_tag("noimage.png", size: "100x100",class:"no-image") %>
       <% end %>
-    </ul>
-  </div>
+      </div>
+      <%# 各投稿のタイトル表示 %>
+      <div class="post-title">
+        <b><%= post.title %></b>
+      </div>
+      <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
+      <div class=“post-tags”>
+        <% post.tags.each do |n| %>
+          <div class=“tag-name”>#<%= n.tagname %></div>
+        <% end %>
+      </div>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+</div>
