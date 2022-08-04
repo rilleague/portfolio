@@ -22,7 +22,6 @@
             <%= link_to current_user.nickname, "#" %>
             <%= link_to "ログアウト", destroy_user_session_path , method: :delete %>
             <%= link_to "マイページ", user_path(current_user.id) %>
-            <%# <%= link_to "カレンダー", "#" %>
           </div>
         <% else %>
           <div class="nav__right">

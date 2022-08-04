@@ -30,11 +30,13 @@
             </p>
           </div>
           <div class="profile-age">
+          <% if @user.age_id != 1 %>
             <p class="prof_age">
               <% if @user.age.present? %>
                 <%= @user.age.name %>
               <% end %>
             </p>
+          <% end %>
           </div>
           <div class="profile-favo">
             <i class="fas fa-heart unlike-btn2"></i>
