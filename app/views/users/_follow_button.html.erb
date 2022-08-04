@@ -1,0 +1,4 @@
+<%# フォローボタン %>
+<%= form_for(current_user, url: user_relationships_path(@user.id), method: :post, remote: true) do |f| %>
+  <%= f.submit "フォロー", class: "btn-flat-border" %>
+<% end %> 

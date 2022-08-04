@@ -17,7 +17,9 @@
           </div>
           <%# ユーザー編集ページに遷移するボタンを表示 %>
           <div class="profile-edit-btn">
+          <% if user_signed_in? && @user == current_user %>
             <%= link_to "プロフィール編集", edit_user_path(@user), class: "profile-btn" %>
+          <% end %>
           </div>
         </div>
         <div class="user-center">
@@ -28,25 +30,36 @@
             </p>
           </div>
           <div class="profile-age">
+          <% if @user.age_id != 1 %>
             <p class="prof_age">
               <% if @user.age.present? %>
                 <%= @user.age.name %>
               <% end %>
             </p>
+          <% end %>
           </div>
           <div class="profile-favo">
             <i class="fas fa-heart unlike-btn2"></i>
             <span class="favorite-count"><%= @favorite_count %></span>
           </div>
+          <% if user_signed_in? && @user != current_user %>
+            <div id="follow-form">
+              <% if current_user.following?(@user) %>
+                <%= render "unfollow_button" %>
+              <% else %>
+                <%= render "follow_button" %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="user-right">
           <%# 自己紹介を表示 %>
           <div class="profile-field-intro">
+          <% if @user.introduction.present? %>
             <p class="prof_intro">
-              <% if @user.introduction.present? %>
-                <%= @user.introduction %>
-              <% end %>
+              <%= @user.introduction %>
             </p>
+          <% end %>
           </div>
         </div>
       </div>
@@ -55,18 +68,16 @@
         <%# タブ部分 %>
         <ul class="tab-list">
           <li class="tab tab-active">
-            美容投稿
+            <h4>美容投稿</h4>
           </li>
           <li class="tab">
-            お悩み投稿
+            <h4>お悩み投稿</h4>
           </li>
           <li class="tab">
-            <span class="follow-count">120</span>
-            <span class="follow-menu">フォロー</span>
+            <h4>フォロー　<%= @following_users.count %></h4>
           </li>
           <li class="tab">
-            <span class="follow-count">120</span>
-            <span class="follow-menu">フォロワー</span>
+            <h4>フォロワー　<%= @follower_users.count %></h4>
           </li>
         </ul>
         <%# タブで選択されて表示されるコンテンツ %>
@@ -80,11 +91,15 @@
             <%= render partial: "contents", locals: { posts: @post2 } %>
           </div>
           <div class="tabbox">
+            <%# フォローリスト表示 %>
+            <%= render partial: "following_users", locals: { following_users: @following_users } %>
           </div>
           <div class="tabbox">
+            <%# フォロワーリスト表示 %>
+            <%= render partial: "follower_users", locals: { follower_users: @follower_users } %>
           </div>
         </div>
       </div>
     </div>
-  </div>  
+  </div>
 </div>

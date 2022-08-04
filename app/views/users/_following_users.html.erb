@@ -1,0 +1,40 @@
+<% @following_users.each do |user| %>
+  <%= link_to user_path(user.id) do %>
+  <div class="follow-user">
+    <div class="follow-left">
+      <div class="follow-user-img">
+        <p class="follow-avatar">
+          <% if user.avatar.present? %>
+            <%= image_tag user.avatar.url, size: "90x90", class: "follow__avatar" %>
+          <% else %>
+           <%= image_tag "default-image.png", size: "90x90", class: "follow__avatar" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="follow-center">
+      <div class="follow-nickname">
+        <p class="follow_name">
+          <%= user.nickname %>
+        </p>
+      </div>
+      <div class="follow-age">
+        <p class="follow-user-age">
+          <% if user.age.present? %>
+            <%= user.age.name %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="follow-right">
+      <div class="follow-field-intro">
+      <% if user.introduction.present? %>
+        <p class="follow_intro">
+          <%= user.introduction %>
+        </p>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
