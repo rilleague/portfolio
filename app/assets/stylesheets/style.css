@@ -1,22 +1,3 @@
-/* リセットCSS */
-* {
-  box-sizing: border-box;
-}
-
-li {
-  list-style: none;
-}
-
-.body {
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-} 
-
-a {
-  text-decoration: none;
-}
-
 /* ヘッダー */
 .header {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
