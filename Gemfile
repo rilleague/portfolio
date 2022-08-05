@@ -69,3 +69,6 @@ gem 'image_processing', '~> 1.2'
 
 # ActiveHashを導入する為のGem
 gem 'active_hash'
+
+# エラー文の日本語化の為のGem
+gem 'rails-i18n'
