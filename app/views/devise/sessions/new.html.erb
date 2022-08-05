@@ -1,26 +1,28 @@
-<div class="contents row">
-  <h2>ログイン</h2>
-  <div class="login-form">
+<div class="sign-page">
+  <div class="form-wrapper">
+    <h2 class="login-title">ログイン</h2>
+    <%# <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="login-form">
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">メールアドレス</label><br/>
-        </div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%# メールアドレス入力 %>
+      <div class="form-item">
+        <label for="email"></label>
+        <%= f.email_field :email, placeholder: "メールアドレス", autofocus: true, autocomplete: "email" %>
       </div>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">パスワード</label>
-          <span class="term">(英数字混合6文字以上)</span>
-        </div>
-        <%= f.password_field :password, autocomplete: "current-password" %>
+      <%# パスワード入力 %>
+      <div class="form-item">
+        <label for="password"></label>
+        <%= f.password_field :password, placeholder: "パスワード", autocomplete: "current-password" %>
       </div>
-
-      <div class="actions">
-        <%= f.submit "ログイン" %>
+      <%# ログインボタン %>
+      <div class="button-panel">
+        <%= f.submit "ログイン", class: "button" %>
       </div>
     <% end %>
+    </div>
+    <%# 新規登録ページへのリンク %>
+    <div class="form-footer">
+      <p><%= link_to "アカウントをお持ちでない方", new_user_registration_path %></p>
+    </div>
   </div>
 </div>
