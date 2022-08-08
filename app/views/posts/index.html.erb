@@ -1,56 +1,62 @@
-<div class="main-contents">
-  <h2 class="new-post_page">
-    <% if @category_id == "2"%>
-      美容投稿
-    <% else %>
-      お悩み投稿
-    <% end %>
-  </h2>
-  <div class="post-contents">
-    <ul class="post-lists">
+<div class="full-background">
+  <div class="container-fluid">
+    <%# 投稿一覧ページのタイトル表示 %>
+    <div class="row">
+      <div class="col-xs-8 col-lg-4 mx-auto">
+        <h2 class="text-black mb-4 mt-4 head-text">
+          <% if @category_id == "2"%>
+            美容投稿
+          <% else %>
+            お悩み投稿
+          <% end %>
+        </h2>
+      </div>
+    </div>
+    <%# 投稿一覧表示 %>
+    <div class="row row-cols-1 row-cols-lg-4 g-4">
       <% @posts.each do |post| %>
-      <li class="list">
-      <%= link_to post_path(post.id) do %>
-        <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
-        <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
-        <div class="post-header">
-          <div class="post-nickname">
-            <% if post.user.avatar.present? %>
-              <%= image_tag post.user.avatar.url, size: "40x40", class: "post-avatar" %>
+        <div class="col">
+          <%= link_to post_path(post.id) do %>
+          <div class="card border border-secondary">
+            <%# ヘッダーに投稿者のアイコン画像といいね数を表示 %>
+            <div class="card-header">
+              <div class="col-auto me-auto">
+                <% if post.user.avatar.present? %>
+                  <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..." %>
+                <% else %>
+                  <%= image_tag "default-image.png", width: "50", height: "50", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..."  %>
+                <% end %>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-heart unlike-btn"></i><%= post.favorites.count %>
+              </div>
+            </div>
+            <%# 投稿した画像の一枚目を表示&画像が無ければ、ダミー画像表示 %>
+            <% if post.images[0] != nil%>
+              <% post.images.each do |image|%>
+                <%= image_tag image.to_s, width: "250", height: "250", class: "card-img border border-secondary", alt: "カードの画像" %>
+                <% break %>
+              <% end %>
             <% else %>
-              <%= image_tag "default-image.png", size: "40x40", class: "post-avatar" %>
+              <%= image_tag "noimage.png", width: "250", height: "250", class: "card-img border border-secondary", alt: "カードの画像" %>
             <% end %>
+            <%# 投稿タイトルとタグを表示 %>
+            <div class="card-body">
+              <h5 class="card-title"><b><%= post.title %></b></h5>
+              <p class="card-text">
+                <% post.tags.each do |n| %>
+                  <i>#<%= n.tagname %><i>
+                <% end %>
+              </p>
+            </div>
+            <%# フッターに投稿してどの程度経った投稿か分かるように表示 %>
+            <div class="card-footer text-muted">
+              <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前
+            </div>
           </div>
-          <div class="post-favorites">
-            <i class="fas fa-heart unlike-btn"></i>
-            <%= post.favorites.count %>
-          </div>
-        </div>
-        <%# ３枚の画像のうち、最初の一枚目を表示 %>
-        <div class="post-image">
-        <% if post.images[0] != nil%>
-          <% post.images.each do |image|%>
-            <%= image_tag image.to_s, size: "100x100" %>
-            <% break %>
-          <% end %>
-        <% else %>
-        <%# 投稿画像が一枚も無ければ、ダミー画像を表示 %>
-          <%= image_tag("noimage.png", size: "100x100",class:"no-image") %>
-        <% end %>
-        </div>
-        <%# 各投稿のタイトル表示 %>
-        <div class="post-title">
-          <b><%= post.title %></b>
-        </div>
-        <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
-        <div class=“post-tags”>
-          <% post.tags.each do |n| %>
-            <div class=“tag-name”>#<%= n.tagname %></div>
           <% end %>
         </div>
-        <% end %>
-      </li>
       <% end %>
-    </ul>
+    </div>
   </div>
 </div>
