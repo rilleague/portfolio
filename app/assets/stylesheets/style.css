@@ -1,5 +1,8 @@
 /* ヘッダー */
-.header {
+.head-avatar {
+  vertical-align: middle;
+}
+/* .header {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
 }
 
@@ -12,20 +15,24 @@
 .logo {
   width: 120px;
   height: 50px;
-} 
+}  */
 
 /* トップページ */
+.top-image {
+  max-width: 100%; 
+  height: auto;
+}
 
-.top-page {
+/* .top-page {
   height: 100vh;
   width: 100vw;
   background-image: url("bg-image.png");
   background-size: cover;
   background-position: top center;
   display: flex;
-}
+} */
 
-.page-btn {
+/* .page-btn {
   margin: 520px 0 10px;
   display: flex;
   padding-left: 120px;
@@ -40,11 +47,11 @@
 
 .consult-btn {
   height: 15vh;
-}
+} */
 
 
 /* メイン */
-.main-post {
+/* .main-post {
   background-color: #5CF0DA;
   width: 100vw;
   height: 100vh;
@@ -52,9 +59,9 @@
 
 .mandatory {
   color: rgb(211, 38, 38);
-}
+} */
 
-/* フッター */
+/* フッター
 .footer {
   width: 100%;
   height: 50px;
@@ -64,55 +71,25 @@
   text-align: center;
   color: #999;
   font-size: 5px;
+} */
+
+/* 投稿ページ */
+.full-background {
+  background-color: #7AC2DD;
+  width: 100vw;
+  min-height: 100vh;
+  padding-bottom: 10rem;
 }
 
+.head-text {
+  padding: 1rem 2rem;
+  border-top: 6px double #000;
+  border-bottom: 6px double #000;
+  text-align: center;
+}
 
 /* 投稿一覧表示 */
 
-.main-contents {
-  background-color: #B9F0E8;
-  width: 100vw;
-}
-
-.new-post_page {
-  color: #1374C6;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.post-lists {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.list {
-  background-color: #FFFFFF;
-  list-style: none;
-  margin: 20px 20px;
-  padding: 10px;
-  border: 1px solid #4e7bcc;
-  width: 15%;
-}
-
-.post-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.post-nickname {
-  padding-bottom: 10px;
-}
-
-.unlike-btn {
-  color: #e54747;
-  font-size: 1em;
-}
-
-
-.post-image {
-  text-align: center;
-  border: 1px solid #b2b3b6;
-}
 
 /* 投稿詳細画面 */
 

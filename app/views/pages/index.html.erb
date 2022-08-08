@@ -1,8 +1,48 @@
-<main class="main">
-  <div class='top-page'>
-    <div class='page-btn'>
-      <%= link_to image_tag("beauty-post.png", class:"beauty-btn"),"/posts?category_id=2" %>
-      <%= link_to image_tag("consult-post.png", class:"consult-btn"),"/posts?category_id=3" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-lg-12">
+      <%= image_tag "bg-image.png", class: "img-fluid top-image" , alt: "..." %>
     </div>
   </div>
-</main>
+</div>
+<div class="container px-5">
+  <div class="row gx-5 align-items-center">
+    <div class="col-lg-6 order-lg-2">
+      <div class="p-5">
+        <%= image_tag "men5.png", class: "img-fluid rounded-circle", alt: "..." %>
+      </div>
+    </div>
+    <div class="col-lg-6 order-lg-1">
+      <div class="p-5">
+        <h2 class="display-4 text-decoration-underline">美容投稿</h2>
+        <p>自分のお気に入りの美容商品や美容体験をシェア出来る！
+        流行っている商品や、同性代のメンズがどんな美容に取り組んでいるか
+        ボタンをクリックしてチェックしよう！</p>
+        <div class="col-xs-4 col-lg-3 ">
+          <%= link_to "美容投稿", "/posts?category_id=2", class:"css-button-retro--green" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content section 2-->
+<div class="container px-5">
+  <div class="row gx-5 align-items-center">
+    <div class="col-lg-6">
+        <div class="p-5">
+          <%= image_tag "men6.png", class: "img-fluid rounded-circle" , alt: "..." %>
+        </div>
+    </div>
+    <div class="col-xs-4 col-lg-6">
+      <div class="p-5">
+        <h2 class="display-4 text-decoration-underline">お悩み投稿</h2>
+        <p>中々治らない肌トラブルの悩みや「気になっているけど、一歩踏み出せないな」といった美容体験など、
+        美容に関する悩みを投稿して、皆んなからアドバイスを貰おう！！</p>
+        <div class="col-xs-4 col-lg-3 ">
+          <%= link_to "お悩み投稿", "/posts?category_id=3", class:"css-button-retro--yellow" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
