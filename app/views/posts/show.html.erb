@@ -1,108 +1,120 @@
-<div class="detail-page">
-  <div class="detail-page-contents">
-    <div class="detail-post">
-
-      <div class="detail-post-header">
-        <%# アイコン・ニックネーム表示 %>
-        <%= link_to user_path(@post.user.id) do %>
-          <div class="detail-user">
-            <div class="detail-post-avator">
+<div class="full-background">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-lg-12 mx-auto">
+        <%# 投稿内容詳細を表示 %>
+        <div class="card border-secondary border-3 mt-5">
+          <%# ヘッダー：投稿ユーザーのアイコン/ユーザーネーム/いいねボタン/(投稿者本人なら)編集ボタン/削除ボタン表示 %>
+          <div class="card-header bg-transparent border-secondary border-2 card-top">
+            <div class="col-auto me-auto">
               <% if @user.avatar.present? %>
-                <%= image_tag @user.avatar.url, size: "70x70", class: "post-avatar" %>
+                <%= image_tag @user.avatar.url, width: "70", height: "70", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..." %>
               <% else %>
-                <%= image_tag "default-image.png", size: "70x70", class: "post-avatar" %>
+                <%= image_tag "default-image.png", width: "70", height: "70", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..."  %>
               <% end %>
+              <i><%= @user.nickname %></i>
             </div>
-            <div class="detail-post-nickname">
-              <%= @user.nickname %>
-            </div>
-          </div>
-        <% end %>
-        <%# いいねボタンの表示 %>
-        <div class="like">
-          <div id = "post_<%= @post.id %>">
-            <span class="like-btn"><%= render partial: "favorites/favorite", locals: { post: @post } %></span>
-          </div>
-        </div>
-      </div>
-
-      <%# 画像を３枚表示 ※画像が保存されていない場合は、ダミー画像を表示%>
-      <div class="detail-post-images">
-        <% image_count = 3 - @post.images.count %>
-        <% @post.images.each do |image|%>
-          <%= image_tag(image.to_s, size: "300x300", class: "post__image") %>
-        <% end %>
-        <% image_count.times do %>
-          <%= image_tag("noimage.png", size: "300x300", class:"dummy__image") %>
-        <% end %>
-      </div>
-
-      <%# タイトル表示 %>
-      <div class="detail-post-title">
-        <b><%= @post.title %></b>
-      </div>
-
-      <%# 部位・肌質の任意項目の表示 %>
-      <div class="detail-any-items">
-        <span class="any-item"><%= @post.skin.name %>/<%= @post.part.name %></span>
-      </div>
-
-      <%# 本文表示（文章＆ハッシュタグ） %>
-      <div class="detail-main-post">
-
-        <%# 文章表示 %>
-        <div class="text">
-          <p><%= @post.detail %></p>
-        </div>
-
-        <%# ハッシュタグ表示 %>
-        <div class=“detail-post-tags”>
-          <% @post.tags.each do |n| %>
-            <div class=“detail-post-tag”>#<%= n.tagname %></div>
-          <% end %>
-        </div>
-      </div>
-
-      <%# コメント投稿&内容表示 %>
-      <div class="comment-form">
-        <div class="detail-post-comments">
-          <% if user_signed_in? %>
-            <%= form_with(model:[@post, @comment], local: true) do |f| %>
-              <%# エラーメッセージ表示 %>
-              <%= render "layouts/error_messages", model: f.object %>
-              <%= f.text_area :content, row:'5', placeholder: "コメントを入力", id:"comment_content"%>
-              <%= f.submit "送信する", class: :form__btn %>
-            <% end %>
-          <% end %>
-        </div>
-        <%# コメント一覧表示 %>
-        <div class="comments_lists">
-          <% if @post.comments.present? %>
-            <p>コメント件数：<%= @post.comments.count %></p>
-            <% @post.comments.each do |comment| %>
-              <strong><%= link_to comment.user.nickname, "#", class: :comment_user %>:</strong>
-              <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
-              <% if comment.user == current_user %>
-                <div class="comment-delete">
-                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+            <div class="col-auto mr-5">
+              <div id = "post_<%= @post.id %>">
+                <span class="like-btn"><%= render partial: "favorites/favorite", locals: { post: @post } %></span>
+              </div>
+              <% if user_signed_in? && current_user.id == @post.user.id %>
+                <div class="mr-5 text-muted">
+                  <%# 投稿編集ボタン表示 %>
+                  <%= link_to edit_post_path(@post.id), method: :get, class: "text-decoration-none" do %>
+                    <div class="edit-btn">
+                      編集<i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="mr-5 text-muted">
+                  <%# 投稿削除ボタン表示 %>
+                  <%= link_to post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "text-decoration-none"  do %>
+                    <div class="delete-btn">
+                      削除<i class="fa-solid fa-trash-can"></i>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
-            <% end %>
-          <% else %>
-            <p>コメントはまだ有りません</p>
-          <% end %>
+            </div>
+          </div>
+          <%# メイン部分：画像３枚/タイトル/肌質・部位/本文(タグ) %>
+          <div class="card-body text-dark">
+            <%# 画像を３枚表示 %>
+            <div class="row mb-4 mt-4">
+              <% image_count = 3 - @post.images.count %>
+              <% @post.images.each do |image|%>
+                <div class="col-4">
+                  <div class="image border border-1">
+                    <%= image_tag(image.to_s, class: "img img-responsive full-width") %>
+                  </div>
+                </div>
+              <% end %>
+              <% image_count.times do %>
+                <div class="col-4">
+                  <div class="image border border-1">
+                    <%= image_tag("noimage.png", class:"img img-responsive full-width") %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <%# タイトル表示 %>
+            <h4 class="card-title mb-1"><b><%= @post.title %></b></h4>
+            <%# 肌質・部位表示 %>
+            <h6 class="card-subitems mb-4 text-muted">
+              <% if @post.skin_id.present? && @post.part_id.present? %>
+                <%= @post.skin.name %>/<%= @post.part.name %>
+              <% elsif @post.skin_id.present? && @post.part_id == nil%>
+                <%= @post.skin.name %>
+              <% elsif @post.skin_id == nil && @post.part_id.present? %>
+                <%= @post.part.name %>
+              <% end %>
+            </h6>
+            <p class="card-text">
+              <p><%= @post.detail %></p>
+              <% @post.tags.each do |n| %>
+                <i class=“mt-2”>#<%= n.tagname %></i>
+              <% end %>
+            </p>
+          </div>
+          <%# フッター：コメントフォーム/コメント一覧 %>
+          <div class="card-footer bg-transparent border-secondary border-2">
+            <h3 class="comment-title mt-3 mb-4" style="max-width: 18rem;">コメント一覧</h3>
+            <%# コメント入力フォーム %>
+            <div class="form-floating mb-4">
+              <% if user_signed_in? %>
+                <%= form_with(model:[@post, @comment], local: true) do |f| %>
+                  <%= f.label :content, "コメント入力", class: "form-label" %>
+                  <%= f.text_area :content, class: "form-control", rows: "3", style: "height: 100px" %>
+                  <div class="mt-3"><%= f.submit "送信する", class: "btn btn-info" %></div>
+                <% end %>
+              <% end %>
+            </div>
+            <%# コメント件数表示 %>
+            <h4 class=" mt-5 mb-2 comment-cnt" style="max-width: 13rem;">コメント件数：<%= @post.comments.count %></h4>
+            <%# コメント一覧表示 %>
+            <div class="col mt-3 mb-2 px-2 border border-3">
+              <% if @post.comments.present? %>
+                <div class="my-2">
+                <% @post.comments.each do |comment| %>
+                  <% if comment.user == current_user %>
+                    <%= link_to post_comment_path(comment.post, comment), method: :delete, class: "delete-btn", data: {confirm: "本当に削除しますか？"} do %>
+                      <i class="fa-solid fa-trash-can"></i>
+                    <% end %>
+                  <% end %>
+                  <i><%= link_to comment.user.nickname, user_path(comment.user.id), class: "ml-5 comment-user" %></i>
+                  <p>
+                    <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
+                  </p>
+                <% end %>
+                </div>
+              <% else %>
+                <p class="text-muted mt-2">コメントはまだ有りません</p>
+              <% end %>
+            <div>
+          </div>
         </div>
       </div>
     </div>
-
-    <%# 編集・削除アクションボタンの表示 %>
-    <% if user_signed_in? && current_user.id == @post.user.id %>
-      <div class="action-lists">
-        <div class="action-list">
-            <%= link_to '編集', edit_post_path(@post.id), method: :get, class:"action__btn" %><br>
-            <%= link_to '削除', post_path(@post.id), method: :delete, class:"action__btn" %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
