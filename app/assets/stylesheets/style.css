@@ -90,10 +90,58 @@
 
 /* 投稿一覧表示 */
 
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unlike-btn {
+  font-size: 1.3em;
+  color: #e54747;
+}
+
+.like-count {
+  font-size: 1.5em;
+}
 
 /* 投稿詳細画面 */
 
-.detail-page {
+.image{
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+.image img{
+  position:absolute;
+}
+
+.comment-cnt {
+  border-bottom: 6px double #000;
+}
+
+.comment-title {
+  position: relative;
+  padding: 1rem 2rem calc(1rem + 10px);
+  background: #7AC2DD;
+}
+
+.comment-title:before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: '';
+  border: 4px solid #000;
+}
+
+.comment-user {
+  text-decoration: none;
+  color: #66c0e1;
+}
+
+/* .detail-page {
   background-color:#7ADDBE;
   height: 100%;
 }
@@ -191,7 +239,7 @@
 .detail-post-comments {
   margin: 20px 0 40px 0;
   padding: 20px 10px;
-}
+} */
 
 /* プロフィール画面 */
 .profile-page {

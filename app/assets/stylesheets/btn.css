@@ -162,3 +162,9 @@
   background: #fff;
   color: #4433ff
 }
+
+
+.delete-btn, .edit-btn {
+  color: grey;
+  text-decoration: none;
+}
