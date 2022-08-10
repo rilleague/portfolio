@@ -1,8 +1,8 @@
 <div class="full-background">
-  <div class="container-fluid">
+  <div class="container">
     <%# 投稿一覧ページのタイトル表示 %>
     <div class="row">
-      <div class="col-xs-8 col-lg-4 mx-auto" style="max-width: 18rem;">
+      <div class="col-xs-8 col-lg-4 mx-auto mt-5" style="max-width: 18rem;">
         <h2 class="text-black mb-5 mt-5 head-text">
           <% if @category_id == "2"%>
             美容投稿
@@ -21,9 +21,9 @@
             <div class="card-header card-top">
               <div class="col-auto me-auto">
                 <% if post.user.avatar.present? %>
-                  <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..." %>
+                  <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "img-fluid rounded-circle border border-2", alt: "..." %>
                 <% else %>
-                  <%= image_tag "default-image.png", width: "50", height: "50", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..."  %>
+                  <%= image_tag "default-image.png", width: "50", height: "50", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
                 <% end %>
                 <i><%= post.user.nickname %></i>
               </div>
