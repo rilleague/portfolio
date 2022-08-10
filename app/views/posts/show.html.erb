@@ -1,18 +1,18 @@
 <div class="full-background">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-lg-12 mx-auto">
+      <div class="col-xs-12 col-lg-12 mx-auto mt-5">
         <%# 投稿内容詳細を表示 %>
         <div class="card border-secondary border-3 mt-5">
           <%# ヘッダー：投稿ユーザーのアイコン/ユーザーネーム/いいねボタン/(投稿者本人なら)編集ボタン/削除ボタン表示 %>
           <div class="card-header bg-transparent border-secondary border-2 card-top">
             <div class="col-auto me-auto">
               <% if @user.avatar.present? %>
-                <%= image_tag @user.avatar.url, width: "70", height: "70", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..." %>
+                <%= image_tag @user.avatar.url, width: "70", height: "70", class: "img-fluid rounded-circle border border-2", alt: "..." %>
               <% else %>
-                <%= image_tag "default-image.png", width: "70", height: "70", class: "img-fluid rounded-circle border border-info head-avatar", alt: "..."  %>
+                <%= image_tag "default-image.png", width: "70", height: "70", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
               <% end %>
-              <i><%= @user.nickname %></i>
+              <i><%= link_to @user.nickname, user_path(@post.user.id), class: "user-name" %></i>
             </div>
             <div class="col-auto mr-5">
               <div id = "post_<%= @post.id %>">
@@ -44,14 +44,14 @@
             <div class="row mb-4 mt-4">
               <% image_count = 3 - @post.images.count %>
               <% @post.images.each do |image|%>
-                <div class="col-4">
+                <div class="col-4 image-hidden">
                   <div class="image border border-1">
                     <%= image_tag(image.to_s, class: "img img-responsive full-width") %>
                   </div>
                 </div>
               <% end %>
               <% image_count.times do %>
-                <div class="col-4">
+                <div class="col-4 img-hidden">
                   <div class="image border border-1">
                     <%= image_tag("noimage.png", class:"img img-responsive full-width") %>
                   </div>
@@ -61,15 +61,21 @@
             <%# タイトル表示 %>
             <h4 class="card-title mb-1"><b><%= @post.title %></b></h4>
             <%# 肌質・部位表示 %>
-            <h6 class="card-subitems mb-4 text-muted">
-              <% if @post.skin_id.present? && @post.part_id.present? %>
-                <%= @post.skin.name %>/<%= @post.part.name %>
-              <% elsif @post.skin_id.present? && @post.part_id == nil%>
-                <%= @post.skin.name %>
-              <% elsif @post.skin_id == nil && @post.part_id.present? %>
-                <%= @post.part.name %>
+            <small class="card-subitems mb-4 text-muted">
+            <%# skin_idもしくはpart_idが1だったら出力を行う %>
+              <% if @post.skin_id != 1 || @post.part_id != 1 %>
+                <%# skin_idかつpart_idが1ではなかったら両方とも表示 %>
+                <% if @post.skin_id != 1 && @post.part_id != 1 %>
+                  <%= @post.skin.name %>/<%= @post.part.name %>
+                <%# part_idが1かつskin_idが1でない場合skin.nameを表示 %>
+                <% elsif @post.part_id == 1 && @post.skin_id != 1 %>
+                  <%= @post.skin.name %>
+                <%# skin_idが1かつpart_idが1でない場合part.nameを表示 %>
+                <% elsif @post.skin_id == 1 && @post.part_id != 1 %>
+                  <%= @post.part.name %>
+                <% end %>
               <% end %>
-            </h6>
+            </small>
             <p class="card-text">
               <p><%= @post.detail %></p>
               <% @post.tags.each do |n| %>
@@ -102,7 +108,7 @@
                       <i class="fa-solid fa-trash-can"></i>
                     <% end %>
                   <% end %>
-                  <i><%= link_to comment.user.nickname, user_path(comment.user.id), class: "ml-5 comment-user" %></i>
+                  <i><%= link_to comment.user.nickname, user_path(comment.user.id), class: "ml-5 user-name" %></i>
                   <p>
                     <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
                   </p>
