@@ -1,11 +1,10 @@
-.sign-page {
+.sign-background {
   background-image: url("signbgfoto.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 100vh;
-  width: 100%;
   background-size: cover;
-  padding-top: 60px
+  background-position: top center;
+  width: 100vw;
+  min-height: 100vh;
+  padding-bottom: 8rem;
 }
 
 .form-wrapper {
@@ -86,4 +85,8 @@
 
 .form-footer a:hover {
   border-bottom: 1px dotted #8c8c8c;
+}
+
+.button-panel {
+  text-align: center;
 }

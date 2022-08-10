@@ -1,7 +1,5 @@
 /* ヘッダー */
-.head-avatar {
-  vertical-align: middle;
-}
+
 /* .header {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 8%);
 }
@@ -18,9 +16,9 @@
 }  */
 
 /* トップページ */
-.top-image {
-  max-width: 100%; 
+div.img-hidden {
   height: auto;
+  overflow: hidden;
 }
 
 /* .top-page {
@@ -88,6 +86,13 @@
   text-align: center;
 }
 
+.head-text2 {
+  padding: 1rem 2rem;
+  border-top: 6px double #FFF;
+  border-bottom: 6px double #FFF;
+  text-align: center;
+}
+
 /* 投稿一覧表示 */
 
 .card-top {
@@ -106,7 +111,6 @@
 }
 
 /* 投稿詳細画面 */
-
 .image{
   position: relative;
   overflow: hidden;
@@ -136,9 +140,9 @@
   border: 4px solid #000;
 }
 
-.comment-user {
+.user-name, .edit-text {
   text-decoration: none;
-  color: #66c0e1;
+  color: #449ebf;
 }
 
 /* .detail-page {
@@ -242,18 +246,6 @@
 } */
 
 /* プロフィール画面 */
-.profile-page {
-  background-color: #7AC2DD;
-  height: 100%;
-  width: 100vw;
-}
-
-.profile-contents {
-  height: 1500px;
-  margin: 30px;
-  padding: 50px 30px;
-}
-
 .profile-content {
   background-color: #FFFFFF;
   height: 100%;
@@ -262,15 +254,6 @@
   border-radius: 10px;
   padding: 20px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-}
-
-.wrap-top {
-  display: flex;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
-  height: 300px;
-  padding: 15px 50px;
-  margin-bottom: 30px;
-  border-radius: 10px;
 }
 
 .user-left {
@@ -343,23 +326,15 @@
   margin-top: 30px;
 }
 
-.profile-field-intro {
-  border: 5px solid #7AC2DD;
-  width: 100%;
-  height: 63%;
-  border-radius: 10px;
-  padding: 20px;
-  overflow: scroll;
-}
-
 .prof_intro {
   font-size: 18px;
 }
 
+
 .wrap-bottom {
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
   width: 100%;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-radius: 10px;
 }
 
@@ -367,6 +342,7 @@
   display: flex;
   width: 100%;
   padding-left: 0px;
+  text-align: center;
 }
 
 .tab {
@@ -386,7 +362,15 @@
   color: #FFF;
   background: #7AC2DD;
   transition: all 0.2s ease-in-out;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
+
+.tab:hover {
+  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
 
 .tabbox {
   display: none;
@@ -399,10 +383,6 @@
 }
 
 /* hover時のアクション */
-.tab:hover {
-  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
-  transform: translateY(-1px);
-}
 
 .tabbox-contents {
   height: 100%;
@@ -469,9 +449,39 @@
   color: black;
 }
 
-
 /* プロフィール編集画面 */
-.user-profile {
+.user-background {
+  background-image: url("editpage.png");
+  background-size: cover;
+  background-position: top center;
+  width: 100vw;
+  min-height: 100vh;
+  padding-bottom: 8rem;
+}
+
+
+
+
+/* プロフィール画面 */
+.profile-left {
+  text-align: center;
+}
+
+.bbbb {
+  background-color: #fff;
+}
+
+.wrap-top {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.profile-intro {
+  border: 5px solid #7AC2DD;
+  overflow: scroll;
+}
+
+/* .user-profile {
   background-color: #7AC2DD;
   height: 100%;
   width: 100vw;
@@ -530,4 +540,4 @@
   border-radius: 50%;
   object-fit: cover;
   border: 5px solid #7AC2DD;
-}
+} */
