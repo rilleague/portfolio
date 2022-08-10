@@ -1,28 +1,37 @@
-<div class="sign-page">
-  <div class="form-wrapper">
-    <h2 class="login-title">ログイン</h2>
-    <%# <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="login-form">
-    <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-      <%# メールアドレス入力 %>
-      <div class="form-item">
-        <label for="email"></label>
-        <%= f.email_field :email, placeholder: "メールアドレス", autofocus: true, autocomplete: "email" %>
+<div class="sign-background">
+  <div class="container">
+    <div class="row px-3">
+      <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+      <div class="col-xs-8 col-lg-6 mx-auto">
+        <div class="col-xs-9 col-lg-5 mx-auto" style="max-width: 22rem;">
+          <h2 class="text-black mb-5 mt-5 head-text">ログイン</h2>
+        </div>
+        <%# メールアドレス入力 %>
+        <div class="mb-3">
+          <p class="form-title">
+            <i class="fa-solid fa-envelope"></i>
+            <%= f.label :email, "メールアドレス", class: "form-label" %>
+          </p>
+          <%= f.email_field :email, placeholder: "@を入れて入力して下さい", autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+        <%# パスワード入力 %>
+        <div class="mb-5">
+          <p class="form-title">
+            <i class="fa-solid fa-lock"></i>
+            <%= f.label :password, "パスワード", class: "form-label" %>
+          </p>
+          <%= f.password_field :password, placeholder: "英数字6文字以上で入力して下さい", autocomplete: "new-password", class: "form-control" %>
+        </div>
+        <%# サインアップボタン %>
+        <div class="col-xs-9 col-lg-5 mt-4 button-panel mx-auto" style="max-width: 22rem;">
+          <%= f.submit "ログイン", class: "button" %>
+        </div>
+        <%# 新規登録ページへのリンク %>
+        <div class="col-xs-9 col-lg-5 mt-1 button-panel mx-auto form-footer" style="max-width: 19rem;">
+          <p><%= link_to "アカウントをお持ちでない方", new_user_registration_path %></p>
+        </div>
       </div>
-      <%# パスワード入力 %>
-      <div class="form-item">
-        <label for="password"></label>
-        <%= f.password_field :password, placeholder: "パスワード", autocomplete: "current-password" %>
-      </div>
-      <%# ログインボタン %>
-      <div class="button-panel">
-        <%= f.submit "ログイン", class: "button" %>
-      </div>
-    <% end %>
-    </div>
-    <%# 新規登録ページへのリンク %>
-    <div class="form-footer">
-      <p><%= link_to "アカウントをお持ちでない方", new_user_registration_path %></p>
+      <% end %>
     </div>
   </div>
 </div>
