@@ -8,6 +8,7 @@
     <div class="row">
       <div class="col-xs-10 col-lg-7 mx-auto">
         <%= form_with model: @post, url: posts_path, local: true do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <%# 画像挿入フォーム %>
         <div class="mb-3">
           <%= f.label :images, "画像選択(上限3枚)", class: "form-label" %>

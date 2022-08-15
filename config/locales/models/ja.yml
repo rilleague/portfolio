@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      post: 投稿 
+    attributes:
+      user:
+        nickname: ニックネーム
+      post: 
+        category_id: 投稿カテゴリー
+        title: タイトル
+        detail: 内容
+        images: 画像
+        category_id: 投稿カテゴリー

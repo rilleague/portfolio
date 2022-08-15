@@ -12,7 +12,7 @@ class PostForm
   # PostモデルのバリデーションをFormオブジェクト内に移す
   with_options presence: true do 
     validates :title
-    validates :category_id, numericality: { other_than: 1, message: "can't be blank"}
+    validates :category_id, numericality: { other_than: 1, message: "を入力してください"}
     validates :detail
   end
 
