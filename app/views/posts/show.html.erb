@@ -8,9 +8,9 @@
           <div class="card-header bg-transparent border-secondary border-2 card-top">
             <div class="col-auto me-auto">
               <% if @user.avatar.present? %>
-                <%= image_tag @user.avatar.url, width: "70", height: "70", class: "img-fluid rounded-circle border border-2", alt: "..." %>
+                <%= image_tag @user.avatar.url, width: "80", height: "80", class: "avatar", alt: "..." %>
               <% else %>
-                <%= image_tag "default-image.png", width: "70", height: "70", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+                <%= image_tag "default-image.png", width: "80", height: "80", class: "avatar", alt: "..."  %>
               <% end %>
               <i><%= link_to @user.nickname, user_path(@post.user.id), class: "user-name" %></i>
             </div>
@@ -23,7 +23,7 @@
                   <%# 投稿編集ボタン表示 %>
                   <%= link_to edit_post_path(@post.id), method: :get, class: "text-decoration-none" do %>
                     <div class="edit-btn">
-                      編集<i class="fa-solid fa-pen-to-square"></i>
+                      編集<i class="fa-solid fa-pen-to-square mt-3"></i>
                     </div>
                   <% end %>
                 </div>
@@ -87,11 +87,10 @@
           <div class="card-footer bg-transparent border-secondary border-2">
             <h3 class="comment-title mt-3 mb-4" style="max-width: 18rem;">コメント一覧</h3>
             <%# コメント入力フォーム %>
-            <div class="form-floating mb-4">
+            <div class="mb-4">
               <% if user_signed_in? %>
                 <%= form_with(model:[@post, @comment], local: true) do |f| %>
-                  <%= f.label :content, "コメント入力", class: "form-label" %>
-                  <%= f.text_area :content, class: "form-control", rows: "3", style: "height: 100px" %>
+                  <%= f.text_area :content, placeholder: "コメント入力", maxlength: "300", class: "form-control", rows: "3", style: "height: 100px" %>
                   <div class="mt-3"><%= f.submit "送信する", class: "btn btn-info" %></div>
                 <% end %>
               <% end %>
@@ -110,7 +109,7 @@
                   <% end %>
                   <i><%= link_to comment.user.nickname, user_path(comment.user.id), class: "ml-5 user-name" %></i>
                   <p>
-                    <%= comment.content %>（<%= comment.created_at.strftime('%Y/%m/%d') %>）
+                    <%= comment.content %><small class="text-muted">（<%= time_ago_in_words(@post.created_at) %>前）</small>
                   </p>
                 <% end %>
                 </div>
