@@ -7,7 +7,7 @@
   text-decoration: none;
   color: #67c5ff;
   transition: .4s;
-  margin-right: 15px;
+  margin-right: 2em;
 }
 
 .btn-vertical-border:before {
@@ -164,7 +164,17 @@
 }
 
 
-.delete-btn, .edit-btn {
-  color: grey;
+.delete-btn {
+  color: rgb(248, 28, 28);
   text-decoration: none;
+}
+
+.edit-btn {
+  color: green;
+  text-decoration: none;
+}
+
+
+.post-btn {
+  margin-right: 3.5em;
 }

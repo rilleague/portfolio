@@ -280,7 +280,7 @@ div.img-hidden {
 }
 
 .favorite-count {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .prof_name {
@@ -467,8 +467,9 @@ div.img-hidden {
   text-align: center;
 }
 
-.bbbb {
+.backcolor {
   background-color: #fff;
+  padding-top: 7em;
 }
 
 .wrap-top {
@@ -536,8 +537,14 @@ div.img-hidden {
   margin-bottom: 50px;
 }
 
-.edit-avatar {
+ */
+
+
+
+ .avatar {
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #7AC2DD;
-} */
+  border: 2px solid #7AC2DD;
+}
+
+
