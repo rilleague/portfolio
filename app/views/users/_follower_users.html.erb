@@ -6,9 +6,9 @@
         <%# ユーザーのアイコン画像を表示 %>
         <div>
           <% if user.avatar.present? %>
-            <%= image_tag user.avatar.url, width: "130", height: "130", class: "img-fluid rounded-circle border border-2", alt: "..." %>
+            <%= image_tag user.avatar.url, width: "180", height: "180", class: "avatar", alt: "..." %>
           <% else %>
-            <%= image_tag "default-image.png", width: "130", height: "130", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+            <%= image_tag "default-image.png", width: "180", height: "180", class: "avatar", alt: "..."  %>
           <% end %>
         </div>
       </div>

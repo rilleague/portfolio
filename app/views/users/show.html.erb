@@ -1,6 +1,6 @@
 <div class="full-background">
   <div class="container">
-    <div class="pt-5 bbbb px-2">
+    <div class="backcolor px-2">
       <div class="row p-4 mx-2 border border-1 wrap-top">
         <div class="col-xs-2 col-lg-2">
           <%# ユーザー情報の左側 %>
@@ -8,9 +8,9 @@
             <%# ユーザーのアイコン画像を表示 %>
             <div>
               <% if @user.avatar.present? %>
-                <%= image_tag @user.avatar.url, width: "180", height: "180", class: "img-fluid rounded-circle border border-2", alt: "..." %>
+                <%= image_tag @user.avatar.url, width: "180", height: "180", class: "avatar", alt: "..." %>
               <% else %>
-                <%= image_tag "default-image.png", width: "180", height: "180", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+                <%= image_tag "default-image.png", width: "180", height: "180", class: "avatar", alt: "..."  %>
               <% end %>
             </div>
             <%# プロフィール編集画面へ遷移する為のリンク先を添付する %>

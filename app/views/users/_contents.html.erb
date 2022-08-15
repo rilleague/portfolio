@@ -6,9 +6,9 @@
         <div class="card-header card-top">
           <div class="col-auto me-auto">
             <% if post.user.avatar.present? %>
-              <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "img-fluid rounded-circle border border-2", alt: "..." %>
+              <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "avatar", alt: "..." %>
             <% else %>
-              <%= image_tag "default-image.png", width: "50", height: "50", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+              <%= image_tag "default-image.png", width: "50", height: "50", class: "avatar", alt: "..."  %>
             <% end %>
             <i><%= post.user.nickname %></i>
           </div>
