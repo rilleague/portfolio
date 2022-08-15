@@ -1,7 +1,7 @@
 <div class="user-background">
   <div class="container">
     <div class="row">
-      <div class="col-xs-9 col-lg-5 mx-auto mt-5" style="max-width: 22rem;">
+      <div class="col-xs-9 col-lg-5 mx-auto mt-5 pt-5" style="max-width: 22rem;">
         <h2 class="text-white mb-5 mt-5 head-text2">プロフィール編集</h2>
       </div>
     </div>
@@ -12,9 +12,9 @@
         <div class="col-xs-6 col-lg-5">
           <div class="mb-4">
             <% if @user.avatar? %>
-              <%= image_tag @user.avatar.url, class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+              <%= image_tag @user.avatar.url, width: "150", height: "150", class: "avatar", alt: "..." %>
             <% else %>
-              <%= image_tag "default-image.png", class: "img-fluid rounded-circle border border-2", alt: "..."  %>
+              <%= image_tag "default-image.png", width: "150", height: "150", class: "avatar", alt: "..." %>
             <% end %>
           </div>
           <%# アイコン画像を編集 %>
