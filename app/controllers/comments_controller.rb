@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(@post), notice: 'コメントを投稿しました'
     else
+      @user = @post.user
       render "posts/show"
     end
   end
@@ -21,5 +22,4 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:content)
   end
-
 end

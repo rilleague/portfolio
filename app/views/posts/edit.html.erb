@@ -1,72 +1,68 @@
-<div class="main-post">
-  <div class="inner">
-    <div class="form__wrapper">
-    
-      <%= form_with model: @form, url: post_path, method: :patch, local: true do |f| %>
-        <div class="field">
-          <%# 画像をアップロードするアクションボタンを表示 %>
-          <div class="image-field">
-            <p>画像を選択する</p>
-            <%= f.file_field :images, multiple: true %>
-          </div>
-          <%# 現在選択中の画像を表示 %>
-          <div class="current-images">
-            <p>現在設定中の画像↓</p>
-            <% @form.images.each do |image|%>
-              <%= image_tag image.to_s %>
-            <% end %>
-          </div>
+<div class="full-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8 col-lg-4 mx-auto mt-5 pt-5" style="max-width: 18rem;">
+        <h2 class="text-black mb-5 mt-5 head-text">投稿編集</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-lg-7 mx-auto">
+        <%= form_with model: @form, url: post_path, method: :patch, local: true do |f| %>
+        <%# 画像挿入フォーム %>
+        <div class="mb-3">
+          <%= f.label :images, "画像選択(上限3枚)", class: "form-label" %>
+          <%= f.file_field :images, multiple: true, class: "form-control" %>
+          <p class="mt-2">現在設定中の画像↓</p>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :title, "タイトル：" %>
-            <span class="mandatory">※必須</span>
-          </div>
-          <%= f.text_field :title, class: "posts-text", id:"post_title" %>
+        <%# 選択中の画像を表示 %>
+        <div class="row mb-4 mt-4">
+          <% @form.images.each do |image|%>
+            <div class="col-4 image-hidden">
+              <div class="image border border-1">
+                <%= image_tag(image.to_s, class: "img img-responsive full-width") %>
+              </div>
+            </div>
+          <% end %>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :category_id, "投稿カテゴリー：" %>
-            <span class="mandatory">※必須</span>
-          </div>
-          <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "select-box"}) %>
+        <%# タイトル編集フォーム %>
+        <div class="mb-3">
+          <%= f.label :title, "タイトル", class: "form-label" %>
+          <span class="text-danger pl-3">※必須</span>
+          <%= f.text_field :title, class: "form-control" %>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :part_id, "部位：" %>
-          </div>
-          <%= f.collection_select(:part_id, Part.all, :id, :name, {}, {class: "select-box"}) %>
+        <%# 投稿カテゴリー編集フォーム %>
+        <div class="col-5 mb-3">
+          <%= f.label :category_id, "投稿カテゴリー", class: "form-label" %>
+          <span class="text-danger pl-3">※必須</span>
+          <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: "form-select"}) %>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :skin_id, "肌質：" %>
-          </div>
-          <%= f.collection_select(:skin_id, Skin.all, :id, :name, {}, {class: "select-box"}) %>
+        <%# 部位編集フォーム %>
+        <div class="col-5 mb-3">
+          <%= f.label :part_id, "部位", class: "form-label" %>
+          <%= f.collection_select(:part_id, Part.all, :id, :name, {}, {class: "form-select"}) %>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :detail, "内容：" %>
-            <span class="mandatory">※必須</span>
-          </div>
-          <%= f.text_area :detail, class: "posts-text", id:"post_detail" %>
+        <%# 肌質編集フォーム %>
+        <div class="col-5 mb-3">
+          <%= f.label :skin_id, "肌質", class: "form-label" %>
+          <%= f.collection_select(:skin_id, Skin.all, :id, :name, {}, {class: "form-select"}) %>
         </div>
-
-        <div class="field">
-          <div class="field-bold-text">
-            <%= f.label :tagname, "タグ(タグ同士の間には半角の「,」を入れてください)：" %>
-          </div>
-          <%= f.text_field :tagname, value: @tag_list, placeholder: "(例)メンズネイル,東京,オススメ", class: "posts-text" %>
+        <%# 本文編集フォーム %>
+        <div class="mb-3">
+          <%= f.label :detail, "内容", class: "form-label" %>
+          <span class="text-danger pl-3">※必須</span>
+          <%= f.text_area :detail, class: "form-control", rows: "10" %>
         </div>
-
-        <div class="actions">
-          <%= f.submit "保存", class: :form_btn %>
+        <%# タグ編集フォーム %>
+        <div class="mb-5">
+          <%= f.label :tagname, "タグ(タグ同士の間には半角の「,」を入れてください)", class: "form-label" %>
+          <%= f.text_field :tagname, value: @tag_list, placeholder: "(例)メンズネイル,東京,オススメ", class: "form-control" %>
         </div>
-      <% end %>
+        <%# 投稿ボタン %>
+        <div class="mb-3">
+          <%= f.submit "保存", class: "css-button-rounded--sky" %>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

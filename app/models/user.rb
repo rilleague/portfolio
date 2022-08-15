@@ -25,7 +25,7 @@ class User < ApplicationRecord
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
     validates_format_of :password, with: PASSWORD_REGEX, on: :create
     # 同じニックネームは保存出来ない且つ6文字以内
-    validates :nickname, uniqueness: true, length: { maximum: 6 }
+    validates :nickname, uniqueness: true, length: { maximum: 8 }
   end
   validates :introduction, length: { maximum: 300 }
 

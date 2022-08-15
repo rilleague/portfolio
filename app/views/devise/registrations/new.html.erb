@@ -1,41 +1,53 @@
-<div class="contents row">
-  <h2>新規登録</h2>
-  <div class="account-form">
-    <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">ニックネーム</label><br/>
+<div class="sign-background">
+  <div class="container">
+    <div class="row px-3">
+      <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+      <div class="col-xs-8 col-lg-6 mx-auto">
+        <div class="col-xs-9 col-lg-5 mx-auto pt-5" style="max-width: 22rem;">
+          <h2 class="text-black mb-5 mt-5 head-text">新規登録</h2>
         </div>
-        <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
-      </div>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">メールアドレス</label><br/>
+        <%# ニックネーム入力 %>
+        <div class="mb-3">
+          <p class="form-title">
+            <i class="fa-solid fa-user"></i>
+            <%= f.label :nickname, "ニックネーム", class: "form-label" %>
+          </p>
+          <%= f.text_field :nickname, placeholder: "8文字以内で入力して下さい", maxlength: "8", autofocus: true, autocomplete: "nickname", class: "form-control" %>
         </div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">パスワード</label>
-          <span class="term">(英数字混合6文字以上)</span>
+        <%# メールアドレス入力 %>
+        <div class="mb-3">
+          <p class="form-title">
+            <i class="fa-solid fa-envelope"></i>
+            <%= f.label :email, "メールアドレス", class: "form-label" %>
+          </p>
+          <%= f.email_field :email, placeholder: "@を入れて入力して下さい", autocomplete: "email", class: "form-control" %>
         </div>
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-
-      <div class="field">
-        <div class="form-text-wrap">
-          <label class= "form-text">確認用パスワード</label><br/>
+        <%# パスワード入力 %>
+        <div class="mb-3">
+          <p class="form-title">
+            <i class="fa-solid fa-lock"></i>
+            <%= f.label :password, "パスワード", class: "form-label" %>
+          </p>
+          <%= f.password_field :password, placeholder: "英数字6文字以上で入力して下さい", autocomplete: "new-password", class: "form-control" %>
         </div>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%# 確認用パスワード入力 %>
+        <div class="mb-5">
+          <p class="form-title">
+            <i class="fa-solid fa-unlock"></i>
+            <%= f.label :password_confirmation, "確認用パスワード", class: "form-label" %>
+          </p>
+          <%= f.password_field :password_confirmation, placeholder: "もう一度入力して下さい", autocomplete: "new-password", class: "form-control" %>
+        </div>
+        <%# サインアップボタン %>
+        <div class="col-xs-9 col-lg-5 mt-4 button-panel mx-auto" style="max-width: 22rem;">
+          <%= f.submit "新規登録", class: "button" %>
+        </div>
+        <%# 新規登録ページへのリンク %>
+        <div class="col-xs-9 col-lg-5 mt-1 button-panel mx-auto form-footer" style="max-width: 19rem;">
+          <p><%= link_to "アカウントをお持ちの方", new_user_session_path %></p>
+        </div>
       </div>
-
-      <div class="actions">
-        <%= f.submit "登録" %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,48 +1,46 @@
-<%# "posts/index.html.erb"の記述から抜粋 %>
-<div class="post-contents">
-  <ul class="post-lists">
-    <% posts.each do |post| %>
-    <li class="list">
-    <%= link_to post_path(post.id) do %>
-      <%# 各投稿全体が詳細画面ページへのリンクになるように設定 %>
-      <%# 投稿者名（＝後にアイコン画像を挿入する箇所） %>
-      <div class="post-header">
-        <div class="post-nickname">
-          <% if post.user.avatar.present? %>
-            <%= image_tag post.user.avatar.url, size: "40x40", class: "post-avatar" %>
-          <% else %>
-            <%= image_tag "default-image.png", size: "40x40", class: "post-avatar" %>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 mt-5 g-5">
+  <% posts.each do |post| %>
+    <div class="col">
+      <div class="card border border-secondary border-2">
+        <%# ヘッダー：投稿者のアイコン画像といいね数を表示 %>
+        <div class="card-header card-top">
+          <div class="col-auto me-auto">
+            <% if post.user.avatar.present? %>
+              <%= image_tag post.user.avatar.url, width: "50", height: "50", class: "avatar", alt: "..." %>
+            <% else %>
+              <%= image_tag "default-image.png", width: "50", height: "50", class: "avatar", alt: "..."  %>
+            <% end %>
+            <i><%= post.user.nickname %></i>
+          </div>
+          <div class="col-auto mr-5">
+            <i class="fas fa-heart unlike-btn "></i>
+            <i class="like-count"><%= post.favorites.count %></i>
+          </div>
+        </div>
+        <%# 投稿した画像の一枚目を表示&画像が無ければ、ダミー画像表示 %>
+        <% if post.images[0] != nil%>
+          <% post.images.each do |image|%>
+            <%= image_tag image.to_s, width: "250", height: "250", class: "card-img border border-1", alt: "カードの画像" %>
+            <% break %>
+          <% end %>
+        <% else %>
+          <%= image_tag "noimage.png", width: "250", height: "250", class: "card-img border border-1", alt: "カードの画像" %>
+        <% end %>
+        <%# 投稿タイトルとタグを表示 %>
+        <div class="card-body">
+          <h5 class="card-title"><b><%= post.title %></b></h5>
+          <p class="card-text text-truncate">
+            <%= post.detail %>
+          </p>
+          <%= link_to post_path(post.id) do %>
+            <button type="button" class="btn btn-light border border-3">もっと見る</button>
           <% end %>
         </div>
-        <div class="post-favorites">
-          <i class="fas fa-heart unlike-btn"></i>
-          <%= post.favorites.count %>
-        </div>
+        <%# フッター：投稿してどの程度経った投稿か分かるように表示 %>
+        <small class="card-footer text-muted">
+          <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前
+        </small>
       </div>
-      <%# ３枚の画像のうち、最初の一枚目を表示 %>
-      <div class="post-image">
-      <% if post.images[0] != nil%>
-        <% post.images.each do |image|%>
-          <%= image_tag image.to_s, size: "100x100" %>
-          <% break %>
-        <% end %>
-      <% else %>
-      <%# 投稿画像が一枚も無ければ、ダミー画像を表示 %>
-        <%= image_tag("noimage.png", size: "100x100",class:"no-image") %>
-      <% end %>
-      </div>
-      <%# 各投稿のタイトル表示 %>
-      <div class="post-title">
-        <b><%= post.title %></b>
-      </div>
-      <%# 各投稿に紐付くタグ情報を「#」を付けて表示 %>
-      <div class=“post-tags”>
-        <% post.tags.each do |n| %>
-          <div class=“tag-name”>#<%= n.tagname %></div>
-        <% end %>
-      </div>
-      <% end %>
-    </li>
-    <% end %>
-  </ul>
+    </div>
+  <% end %>
 </div>

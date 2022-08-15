@@ -1,0 +1,180 @@
+/* 新規登録/ログインボタン */
+.btn-vertical-border {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 5px 11px 5px 15px;
+  text-decoration: none;
+  color: #67c5ff;
+  transition: .4s;
+  margin-right: 2em;
+}
+
+.btn-vertical-border:before {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background:#67c5ff;
+}
+
+.btn-vertical-border:after {
+  position: absolute;
+  display: inline-block;
+  content: '';
+  width: 4px;
+  height: 100%;
+  top:0;
+  left: 100%;
+  border-radius: 3px;
+  background:#67c5ff;
+}
+
+.btn-vertical-border:hover:before, .btn-vertical-border:hover:after {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+
+
+/* 投稿ページに遷移出来るボタン */
+/* 美容投稿 */
+.css-button-retro--green {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border: 1px solid #000;
+  color: #000;
+  background: transparent;
+}
+.css-button-retro--green:hover:after {
+  top: 0;
+  left: 0;
+}
+.css-button-retro--green:after {
+  content: "";
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 5px;
+  left: 5px;
+  transition: 0.2s;
+  background-color: #80ed99;
+}
+
+/* お悩み投稿 */
+.css-button-retro--yellow {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border: 1px solid #000;
+  color: #000;
+  background: transparent;
+}
+.css-button-retro--yellow:hover:after {
+  top: 0;
+  left: 0;
+}
+.css-button-retro--yellow:after {
+  content: "";
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 5px;
+  left: 5px;
+  transition: 0.2s;
+  background-color: #ffe566;
+}
+
+/* 新規投稿ページ遷移ボタン */
+.css-button-sliding-to-left--green {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid #7AC2DD;
+  color: #7AC2DD;
+}
+.css-button-sliding-to-left--green:hover {
+  color: #fff;
+}
+.css-button-sliding-to-left--green:hover:after {
+  width: 100%;
+}
+.css-button-sliding-to-left--green:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #7AC2DD;
+}
+
+/* 新規投稿ボタン */
+.css-button-rounded--sky {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #4433ff;
+  background: #4433ff;
+}
+.css-button-rounded--sky:hover {
+  background: #fff;
+  color: #4433ff
+}
+
+
+.delete-btn {
+  color: rgb(248, 28, 28);
+  text-decoration: none;
+}
+
+.edit-btn {
+  color: green;
+  text-decoration: none;
+}
+
+
+.post-btn {
+  margin-right: 3.5em;
+}
