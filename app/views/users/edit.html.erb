@@ -8,6 +8,7 @@
     <div class="row px-3">
       <div class="col-xs-10 col-lg-8 mx-auto border border-1 p-3">
         <%= form_with model: @user, url: user_path(@user.id), method: :patch, local: true do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <%# 選択中のアイコン画像を表示 %>
         <div class="col-xs-6 col-lg-5">
           <div class="mb-4">

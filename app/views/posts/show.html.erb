@@ -90,6 +90,7 @@
             <div class="mb-4">
               <% if user_signed_in? %>
                 <%= form_with(model:[@post, @comment], local: true) do |f| %>
+                  <%= render 'layouts/error_messages', model: f.object %>
                   <%= f.text_area :content, placeholder: "コメント入力", maxlength: "300", class: "form-control", rows: "3", style: "height: 100px" %>
                   <div class="mt-3"><%= f.submit "送信する", class: "btn btn-info" %></div>
                 <% end %>
@@ -109,7 +110,7 @@
                   <% end %>
                   <i><%= link_to comment.user.nickname, user_path(comment.user.id), class: "ml-5 user-name" %></i>
                   <p>
-                    <%= comment.content %><small class="text-muted">（<%= time_ago_in_words(@post.created_at) %>前）</small>
+                    <%= comment.content %><small class="text-muted">（<%= time_ago_in_words(comment.created_at) %>前）</small>
                   </p>
                 <% end %>
                 </div>

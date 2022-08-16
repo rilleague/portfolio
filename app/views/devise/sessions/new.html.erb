@@ -6,6 +6,10 @@
         <div class="col-xs-9 col-lg-5 mx-auto pt-5" style="max-width: 22rem;">
           <h2 class="text-black mb-5 mt-5 head-text">ログイン</h2>
         </div>
+        <div class='login-flash-message'>
+          <%= flash[:notice] %>
+          <%= flash[:alert] %>
+        </div>
         <%# メールアドレス入力 %>
         <div class="mb-3">
           <p class="form-title">
