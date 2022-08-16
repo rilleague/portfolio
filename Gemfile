@@ -31,6 +31,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # 単体テストに用いるRspecのGem
+  gem 'rspec-rails', '~> 4.0.0'
+  # テスト内でデータの実体を生成する為のGem
+  gem 'factory_bot_rails'
+  # ランダムな値のデータを生成する為のGem
+  gem 'faker'
 end
 
 group :development do
