@@ -8,6 +8,8 @@ class PostForm
   delegate :persisted?, to: :post
   # コントローラーで定義したインスタンス変数wp参照する為に、メソッドを定義
   attr_reader :post
+  # 画像保存の枚数制限
+  FILE_NUMBER_LIMIT = 3
 
   # PostモデルのバリデーションをFormオブジェクト内に移す
   with_options presence: true do 
@@ -15,6 +17,7 @@ class PostForm
     validates :category_id, numericality: { other_than: 1, message: "を入力してください"}
     validates :detail
   end
+  validate :validates_number_of_files
 
   def initialize(attributes = nil, post: Post.new)
     @post = post
@@ -60,5 +63,13 @@ class PostForm
   def destroy
     form = Post.where(id: post_id)
     form.destroy
+  end
+
+
+  private 
+  
+  def validates_number_of_files
+    return if images.length <= FILE_NUMBER_LIMIT
+    errors.add(:images, "に添付出来る画像は#{FILE_NUMBER_LIMIT}枚までです。")
   end
 end
