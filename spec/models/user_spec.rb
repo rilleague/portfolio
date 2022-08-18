@@ -5,22 +5,22 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  describe 'ユーザー新規登録' do
-    
-    context 'ユーザー新規登録が出来る場合' do
+  describe 'バリデーションのテスト' do
+
+    context 'バリデーションが実行されず、正しく実装される場合' do
       it '正しくユーザー情報(nickname,email,password,password_confirmation)が存在すれば登録出来る' do
         expect(@user).to be_valid
       end
     end
 
-    context 'ユーザー新規登録が出来ない場合' do
+    context 'バリデーションが実行され、実装出来ない場合' do
       it 'nicknameが空では登録出来ない' do
         @user.nickname = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("ニックネームを入力してください")
       end
 
-      it 'nicknameが8文字以上では登録出来ない' do
+      it 'nicknameが9文字以上では登録出来ない' do
         @user.nickname = 'test12345'
         @user.valid?
         expect(@user.errors.full_messages).to include("ニックネームは8文字以内で入力してください")
@@ -89,6 +89,12 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = 'test456'
         @user.valid?
         expect(@user.errors.full_messages).to include("パスワード（確認用）とパスワードの入力が一致しません")
+      end
+
+      it "introductionが200文字以下でなければ登録出来ない" do
+        @user.introduction = "a" * 201
+        @user.valid?
+        expect(@user.errors.full_messages).to include("自己紹介は200文字以内で入力してください")
       end
     end
   end

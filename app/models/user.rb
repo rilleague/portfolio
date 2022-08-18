@@ -27,7 +27,7 @@ class User < ApplicationRecord
     # 同じニックネームは保存出来ない且つ8文字以内
     validates :nickname, uniqueness: true, length: { maximum: 8 }
   end
-  validates :introduction, length: { maximum: 300 }
+  validates :introduction, length: { maximum: 200 }
 
   def favorite_find?(post_id)
     # favoritesテーブルにpost_idが存在しているかを探す
