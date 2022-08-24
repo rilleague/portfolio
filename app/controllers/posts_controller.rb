@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     if @post.valid?
       # valid?している理由は、PostFormクラスがApplicationRecordを継承していない事により、saveメソッドがバリデーションを実行する機能を持っていない為
       @post.save(tag_list)
-      redirect_to "/posts?category_id=#{@post.category_id}", notice: "保存しました。"
+      redirect_to "/posts?category_id=#{@post.category_id}"
     else
       render :new
     end
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tagname].split(",")
     if @form.valid?
       @form.save(tag_list)
-      redirect_to post_path(@post.id), notice: "更新しました。"
+      redirect_to post_path(@post.id)
     else
       render :edit
     end
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path, alert: "削除しました。"
+    redirect_to root_path
   end
 
   
