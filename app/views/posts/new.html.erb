@@ -18,7 +18,7 @@
         <div class="mb-3">
           <%= f.label :title, "タイトル", class: "form-label" %>
           <span class="text-danger pl-3">※必須</span>
-          <%= f.text_field :title, class: "form-control" %>
+          <%= f.text_field :title, placeholder: "80文字以内で入力して下さい", class: "form-control" %>
         </div>
         <%# 投稿カテゴリー選択フォーム %>
         <div class="col-5 mb-3">
@@ -40,7 +40,7 @@
         <div class="mb-3">
           <%= f.label :detail, "内容", class: "form-label" %>
           <span class="text-danger pl-3">※必須</span>
-          <%= f.text_area :detail, class: "form-control", rows: "10" %>
+          <%= f.text_area :detail, placeholder: "400文字以内で入力して下さい", class: "form-control", rows: "10" %>
         </div>
         <%# タグ入力フォーム %>
         <div class="mb-5">

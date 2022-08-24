@@ -1,105 +1,97 @@
-# README
+## アプリケーション名
 
-## usersテーブル
-| Column             | Type    | Options                   |
-| ------------------ | ------- | ------------------------- |
-| nickname           | string  | null: false, unique: true |
-| email              | string  | null: false               |
-| age_id             | integer |                           |
-| avatar             | string  |                           |
-| introduction       | text    |                           |
-| encrypted_password | string  | null: false               |
+ポリシャン(Polish and Shine)
 
-### association
-- has_many :posts
-- has_many :comments
-- has_many :favorites
-- has_many :relationships
-- has_many :followings, through: :relationships, source: :follow
-- has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-- has_many :followers, through: :reverse_of_relationships, source: :user 
+## アプリケーション概要
 
+美容に関する情報や悩み事をシェアする事で美容情報をインプット出来、自らの抱えている美容に関する悩みをユーザー同士の交流により解決まで導く事が出来る。
 
+## URL
 
+https://portfolio-20220717.herokuapp.com/
 
-## postsテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| title              | string     | null: false                    |
-| images             | string     |                                |
-| category_id        | integer    | null: false                    |
-| part_id            | integer    |                                |
-| skin_id            | integer    |                                |
-| detail             | text       | null: false                    |
-| user               | references | null: false, foreign_key: true |
+## テスト用アカウント
 
-### association
-- belongs_to :user
-- mount_uploaders :images, ImageUploader
-- belongs_to :category
-- belongs_to :part
-- belongs_to :skin
-- has_many   :tags, through: :post_tags
-- has_many   :post_tags, dependent: :destroy
-- has_many   :favorites
-- has_many   :comments
-- has_many   :favorites 
+- メールアドレス : hoge@gmail.com
+- パスワード    : test1234
 
+## 利用方法
 
+### 美容・お悩み投稿
 
+1. トップページのヘッダーから、新規登録ボタンを押してユーザー新規登録を行う。
+2. ユーザー新規登録完了後、トップページに遷移されヘッダーの"投稿する"ボタンをクリックする。
+3. 投稿内容(必須項目:タイトル, 投稿カテゴリー, 内容)を入力し"投稿する"ボタンをクリックする。
+4. 投稿内容の保存が完了後、選択した投稿カテゴリーの一覧表示画面に遷移する。
 
-## commentsテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| content            | text       | null: false                    |
-| post               | references | null: false, foreign_key: true |
-| user               | references | null: false, foreign_key: true |
+### 投稿に対して、リアクション(コメントやいいね、ユーザーをフォローするなど)
 
-### association
-- belongs_to :user
-- belongs_to :post
+1. 投稿一覧表示ページにて、其々の投稿にある"もっと見る"ボタンを押すと投稿詳細ページに遷移する。
+2. 投稿内容を確認し、内容に関する質問やアドバイスがある場合はコメントする。
+3. 投稿内容が気に入った場合は、投稿ヘッダーにあるハートのボタンをクリックする。
+4. 投稿者が気に入った場合は、ユーザーネームをクリックするとプロフィール画面に遷移し、フォローボタンをクリックする。
 
+## アプリケーションを作成した背景
 
-## tagsテーブル
-| Column             | Type       | Options                         |
-| ------------------ | ---------- | ------------------------------- |
-| tagname            | string     |                                 |
+SNSによる自分の姿を共有する機会が飛躍的に増えた昨今、男性の美容に対する関心や意識の高さが向上している背景が有る中で、美容に関する知識不足により"関心は有るが、一歩踏み出せない"といった層も一定数いるという課題を抱えている事が判明した。
 
-### association
-- has_many   :posts, through: :post_tags
-- has_many   :post_tags, dependent: :destroy
+この課題を引き起こす原因として、情報を取得する手段や機会が少ないのだと仮定した。その根拠として、例えば地方に住んでいる人と都心に住んでいる人では、美容ショップの数や流行が広まるスピード感など、圧倒的に差が生まれる為、そこに情報収集する手段や機会に差があるのだと推測した為だ。
 
+これらの課題を解決する為に、自らの持つ美容情報や悩みを共有し、ユーザー同士でコミュニケーションを取る事で、知識不足は改善されると考え、美容プラットフォームを開発するに至った。
 
-## post_tagsテーブル
-| Column             | Type       | Options                         |
-| ------------------ | ---------- | ------------------------------- |
-| post               | references | null: false, foreign_key: true  |
-| tag                | references | null: false, foreign_key: true  |
+## 洗い出した要件
 
-### association
-- belongs_to :post
-- belongs_to :tag 
+[要件を定義したシート](https://docs.google.com/spreadsheets/d/1IWXegmBZkml6DAV7mcBG2Mi44-gABB6LbftI8qyPpSc/edit#gid=982722306)
+
+## 実装した機能についての画像やGIF及びその説明
+
+### 機能一覧
+
+1. ユーザー管理機能 
+    - 新規登録機能(devise):ユーザー情報を登録出来る(ニックネーム,email,パスワードを入力)。
+    - ログイン機能(devise):登録済みのユーザー情報でログイン出来る(email,パスワードを入力)。
+    - マイページ表示機能:マイページには、自らのプロフィール情報と投稿内容、フォロー・フォロワー情報を確認する事が出来る。
+    - プロフィール編集機能:ユーザー情報(アイコン画像,ニックネーム,自己紹介,年齢)を編集出来る。
+2. 投稿機能(FormObject)
+    - 投稿機能(FormObject/画像:carrierwave):項目(必須項目:タイトル,投稿カテゴリー,内容//任意項目:画像,肌質,部位,タグ情報)を入力し、投稿出来る。
+    - 一覧表示機能:投稿された美容投稿とお悩み投稿が、其々一覧で表示される。
+    - 詳細表示機能:其々の投稿の詳細を確認出来る。
+    - 投稿編集機能:投稿者本人であれば、投稿後に投稿内容を編集出来る。
+    - 投稿削除機能:投稿者本人であれば、投稿後に投稿内容を削除出来る。
+3. いいね機能(Ajax)
+    - いいね登録機能:お気に入りの投稿にいいね出来る(投稿詳細ページにて)
+    - いいね削除機能:お気に入りした投稿のいいねを解除出来る(投稿詳細ページにて)
+4. フォロー・フォロワー機能(Ajax)
+    - フォロー・フォロワー登録機能:お気に入りのユーザーをフォロー出来る(マイページにて)
+    - フォロー・フォロワー削除機能:フォロー済みのユーザーのフォローを解除出来る(マイページにて)
+5. コメント機能
+    - コメント登録機能:投稿に対して、コメントが出来る。
+    - コメント削除機能:自らがコメントした内容のみ、コメント投稿者本人であれば削除出来る。
 
 
+## 実装予定の機能
+- Docker環境を構築する
+- AWS(EC2)でのデプロイ
+- 投稿タグから検索出来るように機能を追加
 
-## favoritesテーブル
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| user               | references | null: false, foreign_key: true |
-| post               | references | null: false, foreign_key: true |
+## データベース設計
 
-### association
-- belongs_to :user
-- belongs_to :post
+![](db.png)
 
+## 画面遷移図
 
+![](page.png)
 
-## relationshipsテーブル
-| Column             | Type          | Options                          
-| ------------------ | ------------- | ---------------------------------
-| follower           | references    | foreign_key: { to_table: :users }   
-| following          | references    | foreign_key: { to_table: :users } 
+## 開発環境
 
-### association
-- belongs_to :follower, class_name: 'User' 
-- belongs_to :following, class_name: 'User' 
+- フロントエンド   : 
+- バックエンド     : 
+- インフラ        : 
+- テスト          : 
+- テキストエディタ  : 
+- タスク管理       :
+
+## ローカルでの動作方法
+
+## 工夫したポイント
+

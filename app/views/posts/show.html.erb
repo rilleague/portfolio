@@ -91,7 +91,7 @@
               <% if user_signed_in? %>
                 <%= form_with(model:[@post, @comment], local: true) do |f| %>
                   <%= render 'layouts/error_messages', model: f.object %>
-                  <%= f.text_area :content, placeholder: "コメント入力", maxlength: "300", class: "form-control", rows: "3", style: "height: 100px" %>
+                  <%= f.text_area :content, placeholder: "コメント入力(200文字以内)", maxlength: "300", class: "form-control", rows: "3", style: "height: 100px" %>
                   <div class="mt-3"><%= f.submit "送信する", class: "btn btn-info" %></div>
                 <% end %>
               <% end %>

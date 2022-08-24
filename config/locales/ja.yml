@@ -3,9 +3,13 @@ ja:
     attributes:
       user:
         nickname: ニックネーム
+        introduction: 自己紹介
+      comment:
+        content: コメント内容
   activemodel:
      attributes:
        post_form:
          title: タイトル
          detail: 内容
          category_id: 投稿カテゴリー
+         images: 画像選択

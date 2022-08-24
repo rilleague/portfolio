@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  extend CarrierWave::Mount
   mount_uploaders :images, ImageUploader
   serialize :images, JSON
   belongs_to :user

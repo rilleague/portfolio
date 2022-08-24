@@ -1,37 +1,26 @@
 class PostForm
   include ActiveModel::Model
-  extend CarrierWave::Mount
-  mount_uploaders :images, ImageUploader
   # PostFormオブジェクトが、PostモデルとTagモデルの属性を扱えるようにする
   attr_accessor :title, :images, :category_id, :part_id, :skin_id, :detail, :tagname, :user_id, :post_id, :tag_id
   # 下記でフォームのアクションをPUSHとPATCHに切り替える。
   delegate :persisted?, to: :post
-  # コントローラーで定義したインスタンス変数wp参照する為に、メソッドを定義
+  # コントローラーで定義したインスタンス変数を参照する為に、メソッドを定義
   attr_reader :post
+  # 画像保存の枚数制限
+  FILE_NUMBER_LIMIT = 3
 
   # PostモデルのバリデーションをFormオブジェクト内に移す
   with_options presence: true do 
-    validates :title
+    validates :title, length: { maximum: 80 }
     validates :category_id, numericality: { other_than: 1, message: "を入力してください"}
-    validates :detail
+    validates :detail, length: { maximum: 400 }
   end
+  validate :validates_number_of_files
 
   def initialize(attributes = nil, post: Post.new)
     @post = post
     attributes ||= default_attributes
     super(attributes)
-  end
-
-  def default_attributes
-    {
-      title: post.title,
-      category_id: post.category_id,
-      part_id: post.part_id,
-      skin_id: post.skin_id,
-      detail: post.detail,
-      user_id: post.user_id,
-      images: post.images,
-    }
   end
 
   def to_model
@@ -60,5 +49,27 @@ class PostForm
   def destroy
     form = Post.where(id: post_id)
     form.destroy
+  end
+
+  # 投稿画像の枚数制限に関するカスタムバリデーション
+  def validates_number_of_files
+    if self.images.length > FILE_NUMBER_LIMIT
+      self.errors.add(:images, "に添付出来る画像は#{FILE_NUMBER_LIMIT}枚までです。")
+      return false
+    end
+  end
+
+  private
+
+  def default_attributes
+    {
+      title: post.title,
+      category_id: post.category_id,
+      part_id: post.part_id,
+      skin_id: post.skin_id,
+      detail: post.detail,
+      user_id: post.user_id,
+      images: post.images,
+    }
   end
 end
