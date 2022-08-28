@@ -31,4 +31,51 @@ RSpec.describe PostForm, type: :model do
       end
     end
   end
+
+  describe 'バリデーション' do
+    before do
+      @user = User.create(nickname: 'taro', email: 'hoge@gmail.com', password: 'test123')
+    end
+    let(:tag_list){ ['tagA', 'tagB'] }
+
+    context 'titleが空の場合' do
+      let(:attributes){{ 'title' => '', 'category_id' => '2', 'detail' => 'この文章はテスト用の文章です', 'user_id' => @user.id}} 
+      it '保存に失敗し、エラー文が表示される' do
+        post_form.valid?
+        expect(post_form.errors.full_messages).to include("タイトルを入力してください")
+      end
+    end
+
+    context 'titleが81字以上の場合' do
+      let(:attributes){{ 'title' => 'a' * 81, 'category_id' => '2', 'detail' => 'この文章はテスト用の文章です', 'user_id' => @user.id }} 
+      it '保存に失敗し、エラー文が表示される' do
+        post_form.valid?
+        expect(post_form.errors.full_messages).to include("タイトルは80文字以内で入力してください")
+      end
+    end
+
+    context 'category_idを選択していない場合' do
+      let(:attributes){{ 'title' => 'テストします', 'category_id' => '1', 'detail' => 'この文章はテスト用の文章です', 'user_id' => @user.id }} 
+      it '保存に失敗し、エラー文が表示される' do
+        post_form.valid?
+        expect(post_form.errors.full_messages).to include("投稿カテゴリーを入力してください")
+      end
+    end
+
+    context 'detailが空の場合' do
+      let(:attributes){{ 'title' => 'テストします', 'category_id' => '2', 'detail' => '', 'user_id' => @user.id }} 
+      it '保存に失敗し、エラー文が表示される' do
+        post_form.valid?
+        expect(post_form.errors.full_messages).to include("内容を入力してください")
+      end
+    end
+
+    context 'detailが401字以上の場合' do
+      let(:attributes){{ 'title' => 'テストします', 'category_id' => '2', 'detail' => 'a' * 401, 'user_id' => @user.id }}
+      it '保存に失敗し、エラー文が表示される' do
+        post_form.valid?
+        expect(post_form.errors.full_messages).to include("内容は400文字以内で入力してください")
+      end
+    end
+  end
 end
