@@ -15,7 +15,7 @@ class PostForm
     validates :category_id, numericality: { other_than: 1, message: "を入力してください"}
     validates :detail, length: { maximum: 400 }
   end
-  validate :validates_number_of_files
+  validate :validates_number_of_files, if: -> { self.images.present? }
 
   def initialize(attributes = nil, post: Post.new)
     @post = post

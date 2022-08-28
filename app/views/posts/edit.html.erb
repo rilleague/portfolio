@@ -17,7 +17,7 @@
         </div>
         <%# 選択中の画像を表示 %>
         <div class="row mb-4 mt-4">
-          <% @form.images.each do |image|%>
+          <% @form.post.images.each do |image|%>
             <div class="col-4 image-hidden">
               <div class="image border border-1">
                 <%= image_tag(image.to_s, class: "img img-responsive full-width") %>

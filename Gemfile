@@ -37,6 +37,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   # ランダムな値のデータを生成する為のGem
   gem 'faker'
+  # デバッグのGem
+  gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :development do
@@ -64,9 +67,6 @@ gem 'dotenv-rails'
 
 # ユーザー管理を行う為のGem
 gem 'devise'
-
-# デバッグの為のGem
-gem 'pry-rails'
 
 # 画像のアップロードを可能にする為のGem
 gem 'carrierwave'
