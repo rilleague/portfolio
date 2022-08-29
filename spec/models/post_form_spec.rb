@@ -76,6 +76,14 @@ RSpec.describe PostForm, type: :model do
         post_form.valid?
         expect(post_form.errors.full_messages).to include("内容は400文字以内で入力してください")
       end
+
+      context 'imagesが4枚以上存在する場合' do
+        let(:attributes){ {'title' => 'テストします', 'category_id' => '2', 'detail' => 'この文章はテスト用の文章です', 'images' => [fixture_file_upload('files/test.png', 'image/png'), fixture_file_upload('files/test1.png', 'image/png'), fixture_file_upload('files/test2.png', 'image/png'), fixture_file_upload('files/test3.png', 'image/png')], 'user_id' => @user.id} }
+        it '保存に失敗し、エラー文が表示される' do
+          post_form.valid?
+          expect(post_form.errors.full_messages).to include("画像選択に添付出来る画像は3枚までです。")
+        end
+      end
     end
   end
 end
