@@ -86,4 +86,22 @@ RSpec.describe PostForm, type: :model do
       end
     end
   end
+
+  describe '#destroy' do
+    before do
+      @user = User.create(nickname: 'taro', email: 'hoge@gmail.com', password: 'test123')
+    end
+    let(:tag_list){ ['tagA', 'tagB'] }
+
+    context '投稿内容を削除する場合' do
+      let(:attributes){ {'title' => 'テストします', 'category_id' => '2', 'detail' => 'この文章はテスト用の文章です', 'user_id' => @user.id} }
+      it '削除に成功し、Postのレコードが1つ削除されている' do
+        post_form.save(tag_list)
+        @post = Post.find(post_form.post.id)  # @post = Post.find(params[:id])
+        expect do
+          @post.destroy
+        end.to change{Post.count}.by(-1)
+      end
+    end
+  end
 end
