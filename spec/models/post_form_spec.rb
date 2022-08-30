@@ -97,7 +97,7 @@ RSpec.describe PostForm, type: :model do
       let(:attributes){ {'title' => 'テストします', 'category_id' => '2', 'detail' => 'この文章はテスト用の文章です', 'user_id' => @user.id} }
       it '削除に成功し、Postのレコードが1つ削除されている' do
         post_form.save(tag_list)
-        @post = Post.find(post_form.post.id)  # @post = Post.find(params[:id])
+        @post = Post.find(post_form.post.id)
         expect do
           @post.destroy
         end.to change{Post.count}.by(-1)
