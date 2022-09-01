@@ -78,3 +78,6 @@ gem 'active_hash'
 
 # エラー文の日本語化の為のGem
 gem 'rails-i18n'
+
+# S3関連のGem
+gem 'fog-aws'
