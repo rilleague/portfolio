@@ -10,6 +10,7 @@ CarrierWave.configure do |config|
     config.storage = :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'polishine20220901'
+    config.asset_host = 'https://s3.amazonaws.com/polishine20220901'
     config.fog_public = false
     # iam_profile
     config.fog_credentials = {
@@ -18,7 +19,7 @@ CarrierWave.configure do |config|
       aws_access_key_id: ENV['S3_ACCESS_KEY_ID'],
       aws_secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
       region: 'ap-northeast-1' #東京リージョン
-      path_style: true
+      # path_style: true
     }
   else
     # 開発環境はlocalに保存
