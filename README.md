@@ -124,6 +124,7 @@ FactoryBot
 DB: MySQL2  
 本番環境: heroku  
 アプリケーションサーバー: puma  
+外部ストレージ: S3  
 
 ## 工夫したポイント
 
