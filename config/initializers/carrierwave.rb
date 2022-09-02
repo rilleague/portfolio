@@ -18,9 +18,8 @@ CarrierWave.configure do |config|
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
       aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       region: 'ap-northeast-1' #東京リージョン
+      path_style: true
     }
-    # キャッシュをS3に保存
-    # config.cache_storage = :fog
   else
     # 開発環境はlocalに保存
     config.storage :file
