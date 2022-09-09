@@ -11,6 +11,16 @@ RSpec.describe User, type: :model do
       it '正しくユーザー情報(nickname,email,password,password_confirmation)が存在すれば登録出来る' do
         expect(@user).to be_valid
       end
+
+      it 'age_idは空でも保存できること' do
+        @user.age_id = 1
+        expect(@user).to be_valid
+      end
+
+      it 'introductionは空でも保存できること' do
+        @user.introduction = ''
+        expect(@user).to be_valid
+      end
     end
 
     context 'バリデーションが実行され、実装出来ない場合' do
