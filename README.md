@@ -9,15 +9,15 @@
 
 ### トップページ
 
-[![Image from Gyazo](https://i.gyazo.com/750414a434569a39234400017b54397d.gif)](https://gyazo.com/750414a434569a39234400017b54397d)
+[![Image from Gyazo](https://i.gyazo.com/ef4bdc0e9b6262db3060432578b9b4cb.gif)](https://gyazo.com/ef4bdc0e9b6262db3060432578b9b4cb)
 
 ### 投稿一覧画面(美容投稿)
 
-[![Image from Gyazo](https://i.gyazo.com/6cf99b09a46360a06a100f8e33f5e30c.jpg)](https://gyazo.com/6cf99b09a46360a06a100f8e33f5e30c)
+[![Image from Gyazo](https://i.gyazo.com/9b664a0983bc9ffc75fca3e30af64d88.gif)](https://gyazo.com/9b664a0983bc9ffc75fca3e30af64d88)
 
 ### 投稿一覧画面(お悩み投稿)
 
-[![Image from Gyazo](https://i.gyazo.com/6f0b1062c565b478416a12ab2d78375a.jpg)](https://gyazo.com/6f0b1062c565b478416a12ab2d78375a)
+[![Image from Gyazo](https://i.gyazo.com/8ceac74970beb1d9b14ab9351c538c7d.gif)](https://gyazo.com/8ceac74970beb1d9b14ab9351c538c7d)
 
 
 ## URL
